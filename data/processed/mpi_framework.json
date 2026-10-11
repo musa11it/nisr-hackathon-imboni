@@ -1,0 +1,124 @@
+{
+ "name": "Rwanda National Multidimensional Poverty Index (EICV7)",
+ "method": "Alkire\u2013Foster adjusted headcount ratio (M0), dual cut-off",
+ "unit_of_identification": "Household (all members share the household's deprivation score)",
+ "unit_of_analysis": "Individual",
+ "poverty_cutoff_k": 0.3333333333333333,
+ "poverty_cutoff_label": "Deprived in at least 1/3 (33.3%) of weighted indicators",
+ "source": "NISR, EICV7 Thematic Report: Multidimensional Poverty, pp. 22\u201323",
+ "changes_vs_eicv5": [
+  "13 indicators instead of 14: bank-account indicator removed (future EICV rounds will not capture it)",
+  "Charcoal no longer counted as cooking-fuel deprivation",
+  "Assets indicator broadened to mobility assets",
+  "School attendance age 6\u201311 (was 7\u201315); years of schooling eligible age 12+ (was 15\u201360)",
+  "Housing materials considers floor, walls and roof (was floor only)",
+  "Overcrowding threshold >3 persons per sleeping room (was >4)",
+  "Poverty cut-off k = 33.3% (was 40%)"
+ ],
+ "indicators": [
+  {
+   "id": "school_attendance",
+   "label": "School attendance",
+   "dimension": "Education",
+   "weight": 0.125,
+   "weight_label": "1/8",
+   "deprived_if": "At least one school-aged child (6\u201311 years) in the household is not attending school."
+  },
+  {
+   "id": "years_of_schooling",
+   "label": "Years of schooling",
+   "dimension": "Education",
+   "weight": 0.125,
+   "weight_label": "1/8",
+   "deprived_if": "No household member aged 12+ has completed at least 6 years of schooling."
+  },
+  {
+   "id": "access_health_care",
+   "label": "Access to health care",
+   "dimension": "Health",
+   "weight": 0.125,
+   "weight_label": "1/8",
+   "deprived_if": "Household lives more than 3 km from a health facility (health post, health centre or district hospital)."
+  },
+  {
+   "id": "health_insurance",
+   "label": "Health insurance",
+   "dimension": "Health",
+   "weight": 0.125,
+   "weight_label": "1/8",
+   "deprived_if": "At least one household member has no health insurance."
+  },
+  {
+   "id": "electricity",
+   "label": "Electricity",
+   "dimension": "Basic services",
+   "weight": 0.05,
+   "weight_label": "1/20",
+   "deprived_if": "Household has no improved electricity (not connected to REG/other distributors and no solar panel system)."
+  },
+  {
+   "id": "drinking_water",
+   "label": "Drinking water",
+   "dimension": "Basic services",
+   "weight": 0.05,
+   "weight_label": "1/20",
+   "deprived_if": "No improved drinking-water source, or source more than 500 m away (rural) / 200 m (urban)."
+  },
+  {
+   "id": "sanitation",
+   "label": "Sanitation",
+   "dimension": "Basic services",
+   "weight": 0.05,
+   "weight_label": "1/20",
+   "deprived_if": "No improved sanitation (no flush toilet or pit latrine with slab)."
+  },
+  {
+   "id": "cooking_fuel",
+   "label": "Cooking fuel",
+   "dimension": "Basic services",
+   "weight": 0.05,
+   "weight_label": "1/20",
+   "deprived_if": "Household cooks with solid fuel (dung, wood, crop residue, shrubs or coal); charcoal is not counted as deprivation."
+  },
+  {
+   "id": "garbage_disposal",
+   "label": "Garbage disposal",
+   "dimension": "Basic services",
+   "weight": 0.05,
+   "weight_label": "1/20",
+   "deprived_if": "Garbage not disposed in a publicly managed refuse area, collection service, or own compost heap."
+  },
+  {
+   "id": "housing_materials",
+   "label": "Housing materials",
+   "dimension": "Living standards",
+   "weight": 0.0625,
+   "weight_label": "1/16",
+   "deprived_if": "Inadequate (natural or rudimentary) material in any of floor, roof or walls."
+  },
+  {
+   "id": "assets",
+   "label": "Assets",
+   "dimension": "Living standards",
+   "weight": 0.0625,
+   "weight_label": "1/16",
+   "deprived_if": "Household owns no more than one of: radio, TV, telephone, computer, bicycle, motorbike, refrigerator \u2014 and no car/truck."
+  },
+  {
+   "id": "overcrowding",
+   "label": "Overcrowding",
+   "dimension": "Living standards",
+   "weight": 0.0625,
+   "weight_label": "1/16",
+   "deprived_if": "More than 3 household members per sleeping room."
+  },
+  {
+   "id": "subsistence_farming",
+   "label": "Subsistence farming",
+   "dimension": "Living standards",
+   "weight": 0.0625,
+   "weight_label": "1/16",
+   "deprived_if": "Household is only engaged in subsistence agriculture and works as agricultural labourers."
+  }
+ ]
+}

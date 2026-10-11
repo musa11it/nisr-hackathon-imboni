@@ -1,0 +1,119 @@
+{
+  "eicv7_mi": {
+    "source_id": "eicv7_mi",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-04/EICV7_Tables_MainIndicatorReport.xlsx",
+    "file": "EICV7_Tables_MainIndicatorReport.xlsx",
+    "status": "present",
+    "sha256": "8a01ec05d851d9813a855e513eb0e74046a070ca0235df9e81730560028e350d",
+    "bytes": 673527,
+    "retrieved_at": "2026-10-11"
+  },
+  "eicv7_mi_pdf": {
+    "source_id": "eicv7_mi_pdf",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-07/EICV7_Main%20Indicator%20Report.pdf",
+    "file": "EICV7_Main_Indicator_Report.pdf",
+    "status": "present",
+    "sha256": "6105321b6edaeac40df291d9b2450cec121cd0a0b7b750554aefabbfd5b2873c",
+    "bytes": 6239762,
+    "retrieved_at": "2026-10-11"
+  },
+  "eicv7_mpi": {
+    "source_id": "eicv7_mpi",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-07/Tables_and_Figures_EICV7_Multidimensional_Poverty_MPI.xlsx",
+    "file": "Tables_and_Figures_EICV7_Multidimensional_Poverty_MPI.xlsx",
+    "status": "present",
+    "sha256": "9b3e995f50659a30dfe828a40870fb6c4e385fb8d93b94a74e901f69e970f39c",
+    "bytes": 115544,
+    "retrieved_at": "2026-10-11"
+  },
+  "eicv7_mpi_pdf": {
+    "source_id": "eicv7_mpi_pdf",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-07/EICV7_Multidimensional_Poverty_Thematic_Report.pdf",
+    "file": "EICV7_Multidimensional_Poverty_Thematic_Report.pdf",
+    "status": "present",
+    "sha256": "03a8f8632f76d32670780cb51080c22cd7290ee9d980d57e8205886c48272f7a",
+    "bytes": 2896385,
+    "retrieved_at": "2026-10-11"
+  },
+  "eicv7_pp": {
+    "source_id": "eicv7_pp",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-05/EICV7_Tables_Rwanda_Poverty_Profile.xlsx",
+    "file": "EICV7_Tables_Rwanda_Poverty_Profile.xlsx",
+    "status": "present",
+    "sha256": "7b47093b7cf7315784a7fe61d9aa912feeafbfeb8f2372b012b7d8b63b5ec142",
+    "bytes": 142801,
+    "retrieved_at": "2026-10-11"
+  },
+  "eicv7_pp_pdf": {
+    "source_id": "eicv7_pp_pdf",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-07/EICV7_Poverty%20Profile.pdf",
+    "file": "EICV7_Poverty_Profile.pdf",
+    "status": "present",
+    "sha256": "8e711487c011ae83dd19924af35bf62e5e0d819343db2a2b65abb26373ad545a",
+    "bytes": 2882677,
+    "retrieved_at": "2026-10-11"
+  },
+  "eicv7_vup": {
+    "source_id": "eicv7_vup",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-07/Final_EICV7_VUP_Thematic_Report_Tables.xlsx",
+    "file": "EICV7_VUP_Thematic_Report_Tables.xlsx",
+    "status": "present",
+    "sha256": "3840886d67e6cd5730381905b1f65aeef842982395b2475df2abb4ce50d21c62",
+    "bytes": 113486,
+    "retrieved_at": "2026-10-11"
+  },
+  "finscope_2024": {
+    "source_id": "finscope_2024",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2024-09/Rwanda-Finscope-2024-Report_compressed.pdf",
+    "file": "Rwanda_FinScope_2024_Report.pdf",
+    "status": "present",
+    "sha256": "8941ee50bf7c7ed37b0747312b95a70410a745f8b62d7da050517322529f6138",
+    "bytes": 2033967,
+    "retrieved_at": "2026-10-11"
+  },
+  "rphc5_main": {
+    "source_id": "rphc5_main",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-02/RPHC5_MainIndicatorsReport_Final.pdf",
+    "file": "RPHC5_MainIndicatorsReport_Final.pdf",
+    "status": "present",
+    "sha256": "72ecb5945dc5672451db84b050c94a21989cd0f614c3924dc67a604ba49c7a8e",
+    "bytes": 6842847,
+    "retrieved_at": "2026-10-11"
+  },
+  "eicv7_questionnaire": {
+    "source_id": "eicv7_questionnaire",
+    "url": "https://microdata.statistics.gov.rw/index.php/catalog/119/download/1080",
+    "file": "docs/EICV7_Questionnaire.pdf",
+    "status": "present",
+    "sha256": "36c3c61804009a796c628d04a9e0ce9d70b65d2e1301a9a74f83500631797726",
+    "bytes": 2108195,
+    "retrieved_at": "2026-10-11"
+  },
+  "eicv7_method_note": {
+    "source_id": "eicv7_method_note",
+    "url": "https://statistics.gov.rw/sites/default/files/documents/2025-04/Methodological%20Note.pdf",
+    "file": "docs/EICV7_Methodological_Note.pdf",
+    "status": "present",
+    "sha256": "5005d1edee1bda17caabc78a5179b606c65eddf180f87cd9b61088a7b3cb4d65",
+    "bytes": 2333693,
+    "retrieved_at": "2026-10-11"
+  },
+  "geoboundaries_adm1": {
+    "source_id": "geoboundaries_adm1",
+    "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/RWA/ADM1/geoBoundaries-RWA-ADM1_simplified.geojson",
+    "file": "boundaries/geoBoundaries-RWA-ADM1_simplified.geojson",
+    "status": "present",
+    "sha256": "426c73767ed4bed8b2d92890eaeb2ce8906d5f07e9367dba3330077abcdcc383",
+    "bytes": 132231,
+    "retrieved_at": "2026-10-11"
+  },
+  "geoboundaries_adm2": {
+    "source_id": "geoboundaries_adm2",
+    "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/RWA/ADM2/geoBoundaries-RWA-ADM2_simplified.geojson",
+    "file": "boundaries/geoBoundaries-RWA-ADM2_simplified.geojson",
+    "status": "present",
+    "sha256": "56b0995c7a7735847659b766e00c5cfa29b1b3a197f231dc396f399948c46c09",
+    "bytes": 289074,
+    "retrieved_at": "2026-10-11"
+  }
+}

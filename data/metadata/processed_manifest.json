@@ -1,0 +1,19 @@
+{
+ "pipeline_version": "1.0.0",
+ "generated_at": "2026-10-11T08:54:01+00:00",
+ "observations": 1746,
+ "indicators_with_data": 104,
+ "geo_features": {
+  "province": 5,
+  "district": 30
+ },
+ "outputs": {
+  "indicators.json": "bbb6c79a242571201b0c8251d3c5951c18bfa4dcf6973d638da7b07a00b648b0",
+  "mpi_framework.json": "0f2714353abca619a2785d5fe0fb2814db7b35b66bb6e53f7a25cf1fe6cf9429",
+  "observations.csv": "004fd598b9ca1d69fa0e49d014502dec4a6e2f731412f9f382a28aca7921269b",
+  "observations.json": "3ce9b2543399ca083a7c669b7916dd72cef2d68a2fb0d8f76bbcf88a4e38beaf",
+  "sources.json": "07a892f67155cb3b58d63ecc29f065103b61271c53c70f5f95ccf3244954885a",
+  "unavailable_financial.json": "e7a1088463494b7f35d0519cbccbf113ad46ab7bcc39c08d1c6920b41a80e625",
+  "validation_report.json": "d51e307a6fd1f7c8052bf4cd102dc25ba6290ffc5e467304791fad2133607086"
+ }
+}

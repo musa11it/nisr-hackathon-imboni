@@ -1,0 +1,20 @@
+# Render Blueprint — one web service (API + built frontend) on the free plan.
+# Deploy: push to GitHub, then Render dashboard → New → Blueprint → select this repo.
+services:
+  - type: web
+    name: imboni
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DB_FALLBACK_ENABLED
+        value: "true"
+      # Optional: a managed MySQL database for persistent saved scenarios.
+      # Leave unset to use SQLite inside the container (scenarios reset on redeploy).
+      - key: DATABASE_URL
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://imboni.onrender.com

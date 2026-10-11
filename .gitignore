@@ -1,0 +1,45 @@
+# Secrets & local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.coverage
+htmlcov/
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+
+# Local databases & generated outputs
+*.db
+*.sqlite
+*.sqlite3
+data/imboni.db
+exports/
+logs/
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Raw third-party publications are not redistributed (terms not stated by the publisher).
+# They are re-downloaded and checksum-verified by: python -m backend.pipeline.build --fetch
+data/raw/**
+!data/raw/README.md
+data/test_imboni.db

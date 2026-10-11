@@ -1,0 +1,1146 @@
+{
+ "summary": {
+  "total": 189,
+  "passed": 180,
+  "errors": 0,
+  "warnings": 9
+ },
+ "checks": [
+  {
+   "check": "no_duplicate_observations",
+   "passed": true,
+   "detail": "0 duplicates: []",
+   "severity": "info"
+  },
+  {
+   "check": "all_indicators_catalogued",
+   "passed": true,
+   "detail": "unknown: []",
+   "severity": "info"
+  },
+  {
+   "check": "values_within_valid_ranges",
+   "passed": true,
+   "detail": "0 out of range: []",
+   "severity": "info"
+  },
+  {
+   "check": "missing_values_flagged",
+   "passed": true,
+   "detail": "1 missing values, all carry an explicit flag",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:poverty_rate",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:health_insurance_cov",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:electricity_lighting",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:improved_water",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:improved_sanitation",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:internet_home",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:mobile_phone",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:smartphone",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:roof_metal",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:umudugudu",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:workforce_ratio",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:sending_transfers",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:fs_banked",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:fs_excluded",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:households_census",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "district_coverage:household_size_census",
+   "passed": true,
+   "detail": "30/30 districts; missing []",
+   "severity": "info"
+  },
+  {
+   "check": "province_coverage:poverty_rate",
+   "passed": true,
+   "detail": "5/5 provinces",
+   "severity": "info"
+  },
+  {
+   "check": "province_coverage:mpi_incidence",
+   "passed": true,
+   "detail": "5/5 provinces",
+   "severity": "info"
+  },
+  {
+   "check": "province_coverage:mpi",
+   "passed": true,
+   "detail": "5/5 provinces",
+   "severity": "info"
+  },
+  {
+   "check": "province_coverage:mpi_ch_cooking_fuel",
+   "passed": true,
+   "detail": "5/5 provinces",
+   "severity": "info"
+  },
+  {
+   "check": "province_coverage:fs_banked",
+   "passed": true,
+   "detail": "5/5 provinces",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:EICV7 monetary poverty 27.4%",
+   "passed": true,
+   "detail": "parsed=27.362976 expected=27.4",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:MPI incidence 30.5%",
+   "passed": true,
+   "detail": "parsed=30.5 expected=30.5",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:Rural MPI incidence 36.7%",
+   "passed": true,
+   "detail": "parsed=36.7 expected=36.7",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:Urban MPI incidence 14.8%",
+   "passed": true,
+   "detail": "parsed=14.8 expected=14.8",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:City of Kigali 12.4%",
+   "passed": true,
+   "detail": "parsed=12.4 expected=12.4",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:Southern 35.2%",
+   "passed": true,
+   "detail": "parsed=35.2 expected=35.2",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:Western 33.5%",
+   "passed": true,
+   "detail": "parsed=33.5 expected=33.5",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:Northern 28.7%",
+   "passed": true,
+   "detail": "parsed=28.7 expected=28.7",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:Eastern 34.4%",
+   "passed": true,
+   "detail": "parsed=34.4 expected=34.4",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:MPI 0.136",
+   "passed": true,
+   "detail": "parsed=0.136 expected=0.136",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:Urban MPI 0.065",
+   "passed": true,
+   "detail": "parsed=0.065 expected=0.065",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:Rural MPI 0.164",
+   "passed": true,
+   "detail": "parsed=0.164 expected=0.164",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:CH cooking fuel 29.2%",
+   "passed": true,
+   "detail": "parsed=29.2 expected=29.2",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:CH housing materials 28.1%",
+   "passed": true,
+   "detail": "parsed=28.1 expected=28.1",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:CH drinking water 17.4%",
+   "passed": true,
+   "detail": "parsed=17.4 expected=17.4",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:CH health insurance 15.1%",
+   "passed": true,
+   "detail": "parsed=15.1 expected=15.1",
+   "severity": "info"
+  },
+  {
+   "check": "benchmark:MPI intensity 44.6%",
+   "passed": true,
+   "detail": "parsed=44.6 expected=44.6",
+   "severity": "info"
+  },
+  {
+   "check": "ci_consistent_with_se",
+   "passed": true,
+   "detail": "0 incoherent: []",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_identity_M0_equals_H_times_A",
+   "passed": true,
+   "detail": "max |H\u00b7A \u2212 M0| = 0.0005 (rounding tolerance 0.0015)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:rwanda",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.1379 vs published M0 = 0.136 (diff +0.0019; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:urban",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.0656 vs published M0 = 0.065 (diff +0.0006; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:rural",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.1670 vs published M0 = 0.164 (diff +0.0030; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:kigali",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.0536 vs published M0 = 0.053 (diff +0.0006; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:southern",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.1608 vs published M0 = 0.158 (diff +0.0028; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:western",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.1518 vs published M0 = 0.149 (diff +0.0028; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:northern",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.1246 vs published M0 = 0.123 (diff +0.0016; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:eastern",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.1594 vs published M0 = 0.157 (diff +0.0024; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:q1",
+   "passed": false,
+   "detail": "\u03a3 w\u00b7CH = 0.2601 vs published M0 = 0.253 (diff +0.0071; CH printed to 1 decimal)",
+   "severity": "warning"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:q2",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.1798 vs published M0 = 0.176 (diff +0.0038; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:q3",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.1324 vs published M0 = 0.131 (diff +0.0014; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:q4",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.0920 vs published M0 = 0.091 (diff +0.0010; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_weighted_ch_sum:q5",
+   "passed": true,
+   "detail": "\u03a3 w\u00b7CH = 0.0297 vs published M0 = 0.030 (diff -0.0003; CH printed to 1 decimal)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_H_aggregates_from_provinces",
+   "passed": true,
+   "detail": "share-weighted H = 30.41 vs national 30.5 (population shares printed as integers)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_H_aggregates_from_areas",
+   "passed": true,
+   "detail": "share-weighted H = 30.57 vs national 30.5 (population shares printed as integers)",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_sum_100:rwanda",
+   "passed": true,
+   "detail": "sum = 99.9",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_reproducible:rwanda",
+   "passed": false,
+   "detail": "max |published \u2212 recomputed| = 8.7 pp (worst: drinking_water: published 15.0 vs recomputed 6.3)",
+   "severity": "warning"
+  },
+  {
+   "check": "mpi_published_contributions_sum_100:urban",
+   "passed": true,
+   "detail": "sum = 100.2",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_reproducible:urban",
+   "passed": false,
+   "detail": "max |published \u2212 recomputed| = 9.7 pp (worst: sanitation: published 10.7 vs recomputed 1.0)",
+   "severity": "warning"
+  },
+  {
+   "check": "mpi_published_contributions_sum_100:rural",
+   "passed": true,
+   "detail": "sum = 100.0",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_reproducible:rural",
+   "passed": false,
+   "detail": "max |published \u2212 recomputed| = 9.3 pp (worst: drinking_water: published 15.4 vs recomputed 6.1)",
+   "severity": "warning"
+  },
+  {
+   "check": "mpi_published_contributions_sum_100:kigali",
+   "passed": true,
+   "detail": "sum = 100.0",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_reproducible:kigali",
+   "passed": false,
+   "detail": "max |published \u2212 recomputed| = 12.7 pp (worst: sanitation: published 13.0 vs recomputed 0.3)",
+   "severity": "warning"
+  },
+  {
+   "check": "mpi_published_contributions_sum_100:southern",
+   "passed": true,
+   "detail": "sum = 100.0",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_reproducible:southern",
+   "passed": false,
+   "detail": "max |published \u2212 recomputed| = 9.6 pp (worst: drinking_water: published 15.3 vs recomputed 5.7)",
+   "severity": "warning"
+  },
+  {
+   "check": "mpi_published_contributions_sum_100:western",
+   "passed": true,
+   "detail": "sum = 99.9",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_reproducible:western",
+   "passed": false,
+   "detail": "max |published \u2212 recomputed| = 8.6 pp (worst: cooking_fuel: published 1.9 vs recomputed 10.5)",
+   "severity": "warning"
+  },
+  {
+   "check": "mpi_published_contributions_sum_100:northern",
+   "passed": true,
+   "detail": "sum = 99.8",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_reproducible:northern",
+   "passed": false,
+   "detail": "max |published \u2212 recomputed| = 9.6 pp (worst: drinking_water: published 15.8 vs recomputed 6.2)",
+   "severity": "warning"
+  },
+  {
+   "check": "mpi_published_contributions_sum_100:eastern",
+   "passed": true,
+   "detail": "sum = 100.1",
+   "severity": "info"
+  },
+  {
+   "check": "mpi_published_contributions_reproducible:eastern",
+   "passed": false,
+   "detail": "max |published \u2212 recomputed| = 8.7 pp (worst: drinking_water: published 15.2 vs recomputed 6.5)",
+   "severity": "warning"
+  },
+  {
+   "check": "overlap_cells_sum_to_total:rwanda",
+   "passed": true,
+   "detail": "\u03a3 cells = 100.0 vs total 100.0",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_cells_sum_to_total:urban",
+   "passed": true,
+   "detail": "\u03a3 cells = 28.3 vs total 28.4",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_cells_sum_to_total:rural",
+   "passed": true,
+   "detail": "\u03a3 cells = 71.6 vs total 71.6",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_cells_sum_to_total:kigali",
+   "passed": true,
+   "detail": "\u03a3 cells = 13.8 vs total 13.7",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_cells_sum_to_total:southern",
+   "passed": true,
+   "detail": "\u03a3 cells = 22.4 vs total 22.4",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_cells_sum_to_total:western",
+   "passed": true,
+   "detail": "\u03a3 cells = 21.5 vs total 21.4",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_cells_sum_to_total:northern",
+   "passed": true,
+   "detail": "\u03a3 cells = 15.5 vs total 15.5",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_cells_sum_to_total:eastern",
+   "passed": true,
+   "detail": "\u03a3 cells = 27.0 vs total 27.0",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_margin_equals_MPI_H",
+   "passed": true,
+   "detail": "MPI-poor margin = 30.5",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_margin_equals_poverty_rate",
+   "passed": true,
+   "detail": "monetary-poor margin = 27.4",
+   "severity": "info"
+  },
+  {
+   "check": "overlap_province_totals_are_population_shares",
+   "passed": true,
+   "detail": "\u03a3 province totals = 100.0% of national population \u2014 province overlap cells are shares of the NATIONAL population",
+   "severity": "info"
+  },
+  {
+   "check": "vup_payment_channels_sum_100:direct_support",
+   "passed": true,
+   "detail": "SACCO + MoMo = 100.00",
+   "severity": "info"
+  },
+  {
+   "check": "vup_payment_channels_sum_100:classic_public_works",
+   "passed": true,
+   "detail": "SACCO + MoMo = 100.00",
+   "severity": "info"
+  },
+  {
+   "check": "vup_payment_channels_sum_100:expanded_public_works",
+   "passed": true,
+   "detail": "SACCO + MoMo = 100.00",
+   "severity": "info"
+  },
+  {
+   "check": "vup_payment_channels_sum_100:nsds",
+   "passed": true,
+   "detail": "SACCO + MoMo = 100.00",
+   "severity": "info"
+  },
+  {
+   "check": "households_eicv_vs_census_within_5pct",
+   "passed": true,
+   "detail": "EICV7 3,289,819 vs Census 2022 3,312,743 (-0.7%); different dates and frames",
+   "severity": "info"
+  },
+  {
+   "check": "poverty_rate_aggregates_from_provinces",
+   "passed": true,
+   "detail": "share-weighted = 27.28 vs national 27.36 (integer population shares)",
+   "severity": "info"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:overall_inclusion",
+   "passed": true,
+   "detail": "'96% financial inclusion rate' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:formal_inclusion",
+   "passed": true,
+   "detail": "'formal inclusion at 92%' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:accounts_in_own_name",
+   "passed": true,
+   "detail": "'86% or 6.9 million of adult Rwandans had financial product accounts in their names' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:mobile_money_account",
+   "passed": true,
+   "detail": "'mobile money (77%)' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:sacco_account",
+   "passed": true,
+   "detail": "'SACCO (28%)' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:insurance",
+   "passed": true,
+   "detail": "'insurance (27%)' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:pension",
+   "passed": true,
+   "detail": "'pension (25%)' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:bank_account",
+   "passed": true,
+   "detail": "'bank (22%)' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:mfi",
+   "passed": true,
+   "detail": "'MFI (7%)' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_headline_evidence:used_mobile_money",
+   "passed": true,
+   "detail": "'86% (6.9 million) of Rwandans own or have used mobile money' found in PDF text"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rwanda:2024",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rwanda:2020",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rural:2024",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rural:2020",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Urban:2024",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Urban:2020",
+   "passed": true,
+   "detail": "sum=101"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Male:2024",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Male:2020",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Female:2024",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Female:2020",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:kigali",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:southern",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:northern",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:eastern",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:western",
+   "passed": true,
+   "detail": "sum=100"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Nyarugenge",
+   "passed": true,
+   "detail": "sum=100 raw='59 40 1'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Gasabo",
+   "passed": true,
+   "detail": "sum=100 raw='51 46 21'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Kicukiro",
+   "passed": true,
+   "detail": "sum=101 raw='62 35 2 2'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Nyanza",
+   "passed": true,
+   "detail": "sum=99 raw='17 74 4 4'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Gisagara",
+   "passed": true,
+   "detail": "sum=100 raw='10 77 9 4'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Nyaruguru",
+   "passed": true,
+   "detail": "sum=99 raw='6 78 5 10'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Huye",
+   "passed": true,
+   "detail": "sum=100 raw='15 73 6 6'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Nyamagabe",
+   "passed": true,
+   "detail": "sum=100 raw='11 84 4 1'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Ruhango",
+   "passed": true,
+   "detail": "sum=100 raw='22 70 5 3'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Muhanga",
+   "passed": true,
+   "detail": "sum=100 raw='17 76 5 2'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Kamonyi",
+   "passed": true,
+   "detail": "sum=99 raw='16 76 4 3'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Karongi",
+   "passed": true,
+   "detail": "sum=100 raw='8 83 6 3'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rutsiro",
+   "passed": true,
+   "detail": "sum=99 raw='9 78 6 6'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rubavu",
+   "passed": true,
+   "detail": "sum=100 raw='22 71 4 3'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Nyabihu",
+   "passed": true,
+   "detail": "sum=100 raw='13 74 5 8'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Ngororero",
+   "passed": true,
+   "detail": "sum=100 raw='10 78 5 7'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rusizi",
+   "passed": true,
+   "detail": "sum=101 raw='22 68 5 6'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Nyamasheke",
+   "passed": true,
+   "detail": "sum=100 raw='13 78 3 6'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rulindo",
+   "passed": true,
+   "detail": "sum=99 raw='13 74 4 8'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Gakenke",
+   "passed": true,
+   "detail": "sum=100 raw='18 69 5 8'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Musanze",
+   "passed": true,
+   "detail": "sum=101 raw='24 71 5 1'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Burera",
+   "passed": true,
+   "detail": "sum=101 raw='11 87 2 1'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Gicumbi",
+   "passed": true,
+   "detail": "sum=101 raw='8 75 11 7'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Rwamagana",
+   "passed": true,
+   "detail": "sum=100 raw='27 68 3 2'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Nyagatare",
+   "passed": true,
+   "detail": "sum=101 raw='17 77 4 3'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Gatsibo",
+   "passed": true,
+   "detail": "sum=100 raw='23 73 3 1'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Kayonza",
+   "passed": true,
+   "detail": "sum=100 raw='11 76 8 5'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Kirehe",
+   "passed": true,
+   "detail": "sum=101 raw='7 86 5 3'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Ngoma",
+   "passed": true,
+   "detail": "sum=100 raw='9 77 6 8'"
+  },
+  {
+   "severity": "info",
+   "check": "finscope_strand_sum:Bugesera",
+   "passed": true,
+   "detail": "sum=101 raw='23 71 5 2'"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Rwanda",
+   "passed": true,
+   "detail": "964287+2348456 vs 3312743"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:City of Kigali",
+   "passed": true,
+   "detail": "432432+56436 vs 488868"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Southern Province",
+   "passed": true,
+   "detail": "108719+651454 vs 760173"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Western Province",
+   "passed": true,
+   "detail": "148659+522847 vs 671506"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Northern Province",
+   "passed": true,
+   "detail": "88394+417670 vs 506064"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Eastern Province",
+   "passed": true,
+   "detail": "186083+700049 vs 886132"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Nyarugenge",
+   "passed": true,
+   "detail": "91603+12382 vs 103985"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Gasabo",
+   "passed": true,
+   "detail": "206614+42806 vs 249420"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Kicukiro",
+   "passed": true,
+   "detail": "134215+1248 vs 135463"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Nyanza",
+   "passed": true,
+   "detail": "9087+83920 vs 93007"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Gisagara",
+   "passed": true,
+   "detail": "3395+97750 vs 101145"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Nyaruguru",
+   "passed": true,
+   "detail": "1902+71903 vs 73805"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Huye",
+   "passed": true,
+   "detail": "17208+78829 vs 96037"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Nyamagabe",
+   "passed": true,
+   "detail": "8888+83164 vs 92052"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Ruhango",
+   "passed": true,
+   "detail": "10576+83932 vs 94508"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Muhanga",
+   "passed": true,
+   "detail": "21089+72152 vs 93241"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Kamonyi",
+   "passed": true,
+   "detail": "36574+79804 vs 116378"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Karongi",
+   "passed": true,
+   "detail": "8794+82650 vs 91444"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Rutsiro",
+   "passed": true,
+   "detail": "4951+81851 vs 86802"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Rubavu",
+   "passed": true,
+   "detail": "69462+54618 vs 124080"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Nyabihu",
+   "passed": true,
+   "detail": "18485+57906 vs 76391"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Ngororero",
+   "passed": true,
+   "detail": "4560+88063 vs 92623"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Rusizi",
+   "passed": true,
+   "detail": "35056+69881 vs 104937"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Nyamasheke",
+   "passed": true,
+   "detail": "7351+87878 vs 95229"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Rulindo",
+   "passed": true,
+   "detail": "9898+82011 vs 91909"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Gakenke",
+   "passed": true,
+   "detail": "4009+89600 vs 93609"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Musanze",
+   "passed": true,
+   "detail": "58426+60961 vs 119387"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Burera",
+   "passed": true,
+   "detail": "9158+82628 vs 91786"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Gicumbi",
+   "passed": true,
+   "detail": "6903+102470 vs 109373"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Rwamagana",
+   "passed": true,
+   "detail": "41920+79131 vs 121051"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Nyagatare",
+   "passed": true,
+   "detail": "40099+120336 vs 160435"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Gatsibo",
+   "passed": true,
+   "detail": "14325+121883 vs 136208"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Kayonza",
+   "passed": true,
+   "detail": "17233+96953 vs 114186"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Kirehe",
+   "passed": true,
+   "detail": "7700+106186 vs 113886"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Ngoma",
+   "passed": true,
+   "detail": "9196+93393 vs 102589"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_urban_plus_rural:Bugesera",
+   "passed": true,
+   "detail": "55610+82167 vs 137777"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_districts_sum_to_province:kigali",
+   "passed": true,
+   "detail": "sum(districts)=488868 vs province=488868"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_districts_sum_to_province:southern",
+   "passed": true,
+   "detail": "sum(districts)=760173 vs province=760173"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_districts_sum_to_province:western",
+   "passed": true,
+   "detail": "sum(districts)=671506 vs province=671506"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_districts_sum_to_province:northern",
+   "passed": true,
+   "detail": "sum(districts)=506064 vs province=506064"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_districts_sum_to_province:eastern",
+   "passed": true,
+   "detail": "sum(districts)=886132 vs province=886132"
+  },
+  {
+   "severity": "info",
+   "check": "census_t58_provinces_sum_to_national",
+   "passed": true,
+   "detail": "3312743 vs 3312743"
+  }
+ ],
+ "generated_at": "2026-10-11T08:54:01+00:00",
+ "pipeline_version": "1.0.0"
+}

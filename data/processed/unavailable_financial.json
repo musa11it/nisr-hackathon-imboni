@@ -1,0 +1,50 @@
+[
+ {
+  "variable": "Household borrowing / loan incidence",
+  "where_collected": "EICV7 questionnaire, Section 10 Part A (Credit)",
+  "status": "collected_not_published",
+  "how_to_obtain": "Requires authorised EICV7 microdata (survey-weighted estimate)."
+ },
+ {
+  "variable": "Loan source (bank, SACCO, MFI, relative, VSLA \u2026)",
+  "where_collected": "EICV7 Section 10 Part A",
+  "status": "collected_not_published",
+  "how_to_obtain": "Authorised microdata."
+ },
+ {
+  "variable": "Loan purpose and repayment status",
+  "where_collected": "EICV7 Section 10 Part A",
+  "status": "collected_not_published",
+  "how_to_obtain": "Authorised microdata."
+ },
+ {
+  "variable": "Reasons loan applications were refused",
+  "where_collected": "EICV7 Section 10 Part A",
+  "status": "collected_not_published",
+  "how_to_obtain": "Authorised microdata."
+ },
+ {
+  "variable": "Savings amounts / savings channels for all households",
+  "where_collected": "EICV7 Section 10 (Savings); Section 9 for VUP participants",
+  "status": "collected_not_published",
+  "how_to_obtain": "Authorised microdata."
+ },
+ {
+  "variable": "Savings & MoMo account rates by district or province",
+  "where_collected": "EICV7 (memo items in Poverty Profile Table 6.9 only by poverty status)",
+  "status": "collected_not_published",
+  "how_to_obtain": "Authorised microdata."
+ },
+ {
+  "variable": "Bank account indicator in MPI",
+  "where_collected": "Dropped from the EICV7 MPI (NISR: future EICV rounds will not capture it).",
+  "status": "discontinued",
+  "how_to_obtain": "Use FinScope for banking access."
+ },
+ {
+  "variable": "Insurance (non-health) uptake by district",
+  "where_collected": "FinScope 2024 reports national figures only in text/figures",
+  "status": "not_available_subnational",
+  "how_to_obtain": "FinScope microdata (NISR catalog 120) under its access terms."
+ }
+]
