@@ -22,7 +22,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from pydantic import BaseModel, Field
 from sqlalchemy import delete, func, select
 
-from . import analytics, nlq, reports, simulator
+from . import analytics, insights, nlq, reports, simulator
 from .config import get_settings
 from .db import SessionLocal, db_status, init_engine
 from .models import Indicator, Observation, Scenario, Source
@@ -237,6 +237,11 @@ def trends(store: DataStore = Depends(store_dep)):
     return analytics.trends(store)
 
 
+@app.get("/api/insights", tags=["analytics"])
+def policy_insights(store: DataStore = Depends(store_dep)):
+    return insights.policy_insights(store)
+
+
 @app.get("/api/analysis/data-quality", tags=["analytics"])
 def data_quality(store: DataStore = Depends(store_dep)):
     return analytics.data_quality(store)
@@ -365,12 +370,7 @@ def profile_pdf(level: Literal["national", "province", "district"], geo_id: str,
 @app.get("/api/reports/profile/{level}/{geo_id}.csv", tags=["reports"])
 def profile_csv(level: Literal["national", "province", "district"], geo_id: str, store: DataStore = Depends(store_dep)):
     p = analytics.profile(store, level, _slug_ok(geo_id))
-    rows = [{**{k: e.get(k) for k in ("indicator_id", "name", "unit", "value", "se", "ci_low", "ci_high", "cv",
-                                      "national", "province", "rank", "n_peers", "period", "status", "table_ref")},
-             "source": e["source"]["short"], "vs_national": (e.get("vs_national") or {}).get("label")}
-            for e in p["indicators"]]
-    return _file(reports.to_csv(rows, preamble=[f"Imboni area profile: {p['name']} ({level})", reports.DISCLAIMER]),
-                 "text/csv", f"imboni_profile_{geo_id}.csv")
+    return _file(reports.profile_csv(p), "text/csv", f"imboni_profile_{geo_id}.csv")
 
 
 # ------------------------------------------------------------------ frontend (production build)

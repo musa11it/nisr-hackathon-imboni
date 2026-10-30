@@ -14,7 +14,7 @@ import logging
 import urllib.request
 from pathlib import Path
 
-from .paths import METADATA_DIR, RAW_DIR
+from .paths import METADATA_DIR, RAW_DIR, write_text_lf
 from .sources import SOURCES
 
 log = logging.getLogger("imboni.pipeline.fetch")
@@ -71,7 +71,7 @@ def fetch_all(force: bool = False) -> dict:
             )
         entries[src["id"]] = entry
     METADATA_DIR.mkdir(parents=True, exist_ok=True)
-    LOG_PATH.write_text(json.dumps(entries, indent=2), "utf-8")
+    write_text_lf(LOG_PATH, json.dumps(entries, indent=2), "utf-8")
     return entries
 
 

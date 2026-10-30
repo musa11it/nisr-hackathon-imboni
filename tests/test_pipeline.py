@@ -6,6 +6,7 @@ import pytest
 from backend.app.db import quote_mysql_identifier
 from backend.pipeline.geography import DISTRICT_PROVINCE, canonical
 from backend.pipeline.model import num
+from backend.pipeline.fetch import sha256
 from backend.pipeline.paths import PROCESSED_DIR, RAW_DIR
 
 
@@ -49,7 +50,6 @@ def test_raw_files_checksummed():
         raw = RAW_DIR / log[sid]["file"]
         if not raw.exists():
             pytest.skip("raw files not downloaded (fresh clone): run python -m backend.pipeline.build --fetch")
-        from backend.pipeline.fetch import sha256
         assert sha256(raw) == log[sid]["sha256"], f"{sid} differs from the recorded checksum"
 
 
@@ -103,3 +103,12 @@ def test_recomputed_contributions_sum_to_100(store):
 def test_mpi_weights_sum_to_one(store):
     assert sum(i["weight"] for i in store.mpi_framework["indicators"]) == pytest.approx(1.0)
     assert len(store.mpi_framework["indicators"]) == 13
+
+
+def test_processed_outputs_match_manifest_checksums():
+    """Committed processed files are exactly what the pipeline produced (LF endings make this OS-independent)."""
+    manifest = json.loads((RAW_DIR.parent / "metadata" / "processed_manifest.json").read_text("utf-8"))
+    assert manifest["outputs"], "manifest lists no outputs"
+    for name, digest in manifest["outputs"].items():
+        assert sha256(PROCESSED_DIR / name) == digest, f"{name} differs from processed_manifest.json — rerun the pipeline"
+    assert manifest.get("partial_build") is False

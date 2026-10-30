@@ -10,8 +10,13 @@
 - Drafting code: the data pipeline (download, parsing, validation), the FastAPI backend, the statistical
   functions, the budget simulator, the deterministic question-answering module, the React frontend and tests.
 - Drafting documentation (README, methodology, data catalogue, deployment and demo guides).
+- A second session (2026-10-30) assisted with: assessing the existing architecture; checking the accessibility of
+  the official NISR source pages; the Streamlit dashboard (`streamlit_app.py`, `dashboard/`); the policy-insights
+  module; the pipeline's data inventory, missing-source handling and data-quality summary; the GitHub Actions
+  workflow; additional tests; and updates to the documentation.
 
 **What the AI did not do**
+- It was not added as a Git author, co-author or repository collaborator.
 - It did not generate, impute or invent any statistic. All figures come from the cited NISR/FinScope/Census
   publications via the reproducible pipeline; calculated values follow published formulas.
 - The deployed application calls no external AI service and needs no AI API key.
@@ -20,6 +25,8 @@
 - [ ] We reviewed the code and understand how each component works.
 - [ ] We checked key figures against the original NISR publications.
 - [ ] We reviewed the methodology, limitations and wording of findings.
+- [ ] We reviewed and accept (or edited) the "potential implication" sentences in `backend/app/insights.py`, which
+      were drafted with AI assistance and are labelled in the app as the team's interpretation.
 - [ ] We ran the test suite and the application ourselves.
 - Team members and roles: ______________________
 

@@ -1,0 +1,37 @@
+# Imboni Streamlit configuration (safe to commit: no secrets here — secrets belong in .streamlit/secrets.toml,
+# which is git-ignored, or in the Streamlit Community Cloud "Secrets" panel).
+
+[server]
+headless = true
+runOnSave = false
+maxUploadSize = 5
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "viewer"
+showErrorDetails = "type"
+
+[theme]
+base = "light"
+primaryColor = "#0f6e64"
+backgroundColor = "#f7f5f0"
+secondaryBackgroundColor = "#efece4"
+textColor = "#0f1b2d"
+linkColor = "#0f6e64"
+borderColor = "#e3dfd5"
+dataframeHeaderBackgroundColor = "#efece4"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+headingFont = "Fraunces:https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+baseRadius = "0.6rem"
+showSidebarBorder = false
+chartCategoricalColors = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"]
+
+[theme.sidebar]
+backgroundColor = "#0b1a2b"
+secondaryBackgroundColor = "#12263c"
+textColor = "#e6ecf2"
+primaryColor = "#5fd0c0"
+linkColor = "#5fd0c0"
+borderColor = "#1d3550"

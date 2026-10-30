@@ -136,3 +136,39 @@ unmatched questions return suggestions. No language model is used.
   "higher is better" indicators); no-data areas are hatched; every map has a sortable table alternative and
   keyboard-focusable regions.
 * No dual axes; status colours are reserved for status and always paired with icons/text.
+
+## 11. Policy insights (`app/insights.py`)
+
+Each insight is a function of the processed observations, recomputed whenever the data change: a finding, the
+supporting statistics (each with its status), source tables, the geographic scope the source supports, a
+*potential* implication (labelled as the team's interpretation, not an NISR finding) and limitations. If any input
+is missing the insight is skipped and listed as skipped — never approximated. Insights include: overlap of the two
+poverty measures (MPI Table 3.1), rural/urban gaps with a z-test on published SEs, districts significantly above the
+national poverty rate with rank-interval caveats, most common MPI deprivations, the comparable 2016/17→2024 poverty
+change, FinScope access strand, savings/MoMo by poverty status, VUP payment channels and timeliness, and the
+district-level poverty × banked association (Spearman, ecological).
+
+## 12. Data-quality assessment (`pipeline/quality.py`)
+
+For every indicator × level the pipeline records observations present/missing, the reasons for missingness (from
+flags), how many values carry a published standard error, and how many exceed CV 15% / 30%. The dashboard's
+**Data Explorer → Data quality** tab shows this together with the validation checks and the share of observations
+with published SEs by level.
+
+## 13. What is deliberately not done
+
+* **No re-weighting / no new confidence intervals from microdata.** Survey weights, strata and PSUs are only in the
+  restricted EICV7 microdata (see DATA_SOURCES "Survey design"). Intervals are shown only where NISR published SEs.
+* **No machine learning.** The public data have 30 districts and 5 provinces — far too few independent observations
+  for a defensible predictive model, and there is no prediction target that would add evidence beyond the published
+  estimates. Household-level models would require authorised microdata and a pre-specified target.
+* **No causal claims.** Associations across districts are ecological; the simulator is arithmetic, not an impact model.
+
+## 14. Streamlit dashboard (`streamlit_app.py`, `dashboard/`)
+
+The dashboard calls the same functions as the API (`analytics`, `simulator`, `insights`, `nlq`, `reports`), cached
+with `st.cache_data`. Simulator inputs are validated by the same Pydantic model (`ScenarioInput`); allocation
+shares move in 0.1-point steps, the "equal" and "need-weighted" splits always total exactly 100%, and results are
+withheld while shares exceed 100%. Saved scenarios live in the browser session only. Maps use Plotly choropleths on
+the geoBoundaries geometry (rings rewound to the clockwise convention Plotly/d3 expects) with a continuous single-hue
+scale; unpublished areas are grey.

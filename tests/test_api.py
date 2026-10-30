@@ -89,3 +89,10 @@ def test_exports(client):
 def test_ask(client):
     r = client.post("/api/ask", json={"question": "Which districts have the highest poverty rate?"}).json()
     assert r["kind"] == "ranking" and r["rows"][0]["geo_name"] == "Nyamagabe"
+
+
+def test_insights_endpoint(client):
+    r = client.get("/api/insights")
+    assert r.status_code == 200
+    body = r.json()
+    assert len(body["insights"]) >= 8 and body["skipped"] == []

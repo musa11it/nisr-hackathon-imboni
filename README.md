@@ -33,45 +33,62 @@ plausibly reach* — without over-reading uncertain numbers or confusing differe
 
 ## 3. Architecture
 
+**Hybrid:** a Streamlit dashboard is the primary interface; it imports the same Python analytics as the
+FastAPI backend, which still serves the React app. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the
+assessment and decision.
+
 ```
- official NISR files ──► backend/pipeline (fetch → parse → validate → build) ──► data/processed/*.json|csv
-                                                                                    │
-                       FastAPI (backend/app) ◄──────────── in-memory DataStore ◄────┘
-                         │   analytics · simulator · nlq · reports (ReportLab PDF / CSV)
-                         │   SQLAlchemy ──► MySQL (configured)  or  SQLite fallback  (scenarios + data mirror)
-                         ▼
-                  React + Vite + Tailwind SPA (frontend/) — d3-geo maps, Recharts, Lucide icons
+ official NISR files ──► backend/pipeline (inventory → parse → validate → quality) ──► data/processed/*.json|csv
+                                                                                          │ (committed)
+                    backend/app: store · analytics · simulator · insights · nlq · reports ◄┘
+                         │                                          │
+   streamlit_app.py + dashboard/  (PRIMARY)          FastAPI main.py ──► React + Vite SPA (frontend/)
+   no database, no secrets, no network at runtime    SQLAlchemy ──► MySQL or SQLite fallback (saved scenarios)
 ```
 
-* The API serves statistics from the validated processed files, so the app works even if the database is down.
-  The database stores saved scenarios and a mirrored copy of the reference data for SQL users.
-* In production one container serves both the API (`/api/*`) and the built frontend.
+* Every statistic is computed once, in `backend/app`, from the validated processed files. Neither interface needs
+  the database to show statistics; Streamlit does not use it at all.
+* The Docker image (one container serving `/api/*` and the React build) remains available as an alternative.
 
-**Stack:** Python 3.13 · FastAPI · SQLAlchemy 2 · PyMySQL · SciPy/NumPy · ReportLab · openpyxl · pdfplumber ·
-React 19 · TypeScript · Vite 8 · Tailwind CSS 4 · Recharts · d3-geo · lucide-react.
+**Stack:** Python 3.13 · Streamlit · Plotly · pandas · FastAPI · SQLAlchemy 2 · SciPy/NumPy · ReportLab · openpyxl ·
+pdfplumber · React 19 · TypeScript · Vite 8 · Tailwind CSS 4 · Recharts · d3-geo.
 
 ## 4. Folder structure
 
 ```
 nisr-hachathon/
+├── streamlit_app.py    Streamlit entrypoint (navigation, theme, sidebar)
+├── dashboard/          Streamlit pages (views/), charts.py, theme.py, ui.py, data.py (cached access), logic.py (pure helpers)
 ├── backend/
-│   ├── app/            FastAPI app: main.py (routes), analytics.py, simulator.py, nlq.py, reports.py, db.py, models.py
-│   └── pipeline/       sources.py (registry), fetch.py, parse_eicv.py, parse_pdf.py, validate.py, build.py
+│   ├── app/            analytics.py, simulator.py, insights.py, nlq.py, reports.py, store.py; FastAPI main.py, db.py, models.py
+│   └── pipeline/       sources.py (registry), fetch.py, inventory.py, parse_eicv.py, parse_pdf.py, validate.py, quality.py, build.py
 ├── frontend/           React SPA (src/pages, src/components, src/lib), public/images (CC0 photos + credits)
 ├── data/
 │   ├── raw/            original files, unchanged (downloaded, not committed)
-│   ├── processed/      observations.csv/json, indicators.json, sources.json, validation_report.json, geo/
-│   └── metadata/       retrieval_log.json (URLs, dates, SHA-256), processed_manifest.json
-├── docs/               methodology, data sources, database, deployment, demo guide, limitations, AI disclosure
+│   ├── processed/      observations.csv/json, indicators.json, sources.json, validation_report.json, data_quality_summary.csv, geo/
+│   └── metadata/       retrieval_log.json (URLs, dates, SHA-256), data_inventory.json, processed_manifest.json
+├── docs/               architecture, methodology, data sources & dictionary, deployment, demo guide, limitations, AI disclosure
 ├── scripts/            setup.ps1 / setup.sh, init_db.py
-├── tests/              pytest suite (pipeline, analytics, simulator, API, exports)
-├── Dockerfile · render.yaml · requirements*.txt · .env.example
+├── tests/              pytest suite (pipeline, analytics, simulator, API, dashboard pages, charts)
+├── .github/workflows/  ci.yml — lint, data checks, tests, Streamlit + React smoke builds
+├── .streamlit/         config.toml (theme; no secrets)
+├── Dockerfile · render.yaml · requirements*.txt · ruff.toml · .env.example
 ```
 
 ## 5. Run it locally
 
-**Prerequisites:** Python 3.13 (tested; 3.11+ likely works but is untested), Node.js 20+ (tested with Node 24), optional MySQL 8.
+**Prerequisites:** Python 3.13 (tested; 3.11+ likely works but is untested). Node.js 20+ (tested with Node 24)
+and MySQL 8 are needed only for the React/FastAPI variant.
 
+**Streamlit dashboard (primary, no database or `.env` needed):**
+```bash
+python -m venv .venv
+.venv/Scripts/pip install -r requirements-dev.txt          # macOS/Linux: .venv/bin/pip
+.venv/Scripts/streamlit run streamlit_app.py                # http://localhost:8501
+```
+The committed `data/processed/` is enough to run it. To rebuild the data, see §7.
+
+**React + FastAPI variant:**
 ```bash
 # one-shot (Windows):   powershell -ExecutionPolicy Bypass -File scripts/setup.ps1
 # one-shot (macOS/Linux/Git Bash):  bash scripts/setup.sh
@@ -95,9 +112,13 @@ cd frontend && npm run dev                                                  # ht
 
 **Tests and checks:**
 ```bash
-.venv/Scripts/python -m pytest -q          # 57 tests
+.venv/Scripts/python -m pytest -q          # 101 tests, incl. Streamlit page smoke tests (streamlit.testing)
+.venv/Scripts/ruff check .                 # lint (ruff.toml)
 cd frontend && npx tsc -b && npm run lint && npm run build
 ```
+GitHub Actions (`.github/workflows/ci.yml`) runs the same checks on every push and pull request, plus a check that
+the committed processed files match `processed_manifest.json` and a live `streamlit run` health check. CI never
+downloads NISR data and needs no secrets.
 
 ## 6. Configuration and database
 
@@ -128,11 +149,20 @@ The app never creates MySQL users, changes passwords or drops data. Tables are c
 
 ## 7. Data acquisition and processing
 
-`python -m backend.pipeline.build --fetch` downloads public files listed in
-[`backend/pipeline/sources.py`](backend/pipeline/sources.py), records URL / date / SHA-256, keeps raw files
-unchanged, parses tables by their printed labels, validates, and writes `data/processed/`. Without `--fetch` it
-rebuilds offline from existing raw files. The build **fails** on any pipeline error; documented *source*
-inconsistencies are reported as warnings. Restricted EICV7 microdata are never downloaded — see
+```bash
+python -m backend.pipeline.inventory               # which source files are present / missing / restricted
+python -m backend.pipeline.build --fetch           # download missing public files, then build + validate
+python -m backend.pipeline.build                   # rebuild offline from data/raw
+python -m backend.pipeline.build --allow-partial   # build without missing OPTIONAL sources (VUP, FinScope, Census)
+```
+
+The build downloads public files listed in [`backend/pipeline/sources.py`](backend/pipeline/sources.py), records
+URL / date / SHA-256, keeps raw files unchanged, parses tables by their printed labels, validates, and writes
+`data/processed/` (plus `data_quality_summary.csv`: missing values, published SEs and CV flags per indicator).
+It first runs a data inventory: if a source is missing it **stops before writing anything** and lists what to
+download. `--allow-partial` records skipped sources as validation warnings and in the manifest — they are never
+filled with substitute values. The build **fails** on any pipeline error; documented *source* inconsistencies are
+reported as warnings. Restricted EICV7 microdata are never downloaded — see
 [docs/MICRODATA_IMPORT.md](docs/MICRODATA_IMPORT.md).
 
 | Source (public) | Used for |
@@ -157,9 +187,11 @@ Full registry with checksums: in-app **Sources & methods** page and [docs/DATA_S
 
 ## 9. Deployment
 
-A `Dockerfile` (multi-stage: Node build → Python runtime) and a Render Blueprint (`render.yaml`) are included.
-See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). **Status: not yet deployed** — deploying requires the team's own
-Render (or similar) account; no live URL is claimed.
+**Recommended: Streamlit Community Cloud** — repository `musa11it/nisr-hackathon-imboni`, main file
+`streamlit_app.py`, Python 3.13, no secrets required. Step-by-step instructions are in
+[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). A `Dockerfile` and Render Blueprint (`render.yaml`) remain for the
+React/FastAPI variant. **Status: not yet deployed** — deploying requires the team's own account; no live URL is
+claimed.
 
 ## 10. AI-assistance disclosure
 

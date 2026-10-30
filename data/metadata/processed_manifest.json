@@ -1,19 +1,22 @@
 {
  "pipeline_version": "1.0.0",
- "generated_at": "2026-10-11T08:54:01+00:00",
+ "generated_at": "2026-10-30T20:24:29+00:00",
  "observations": 1746,
  "indicators_with_data": 104,
  "geo_features": {
   "province": 5,
   "district": 30
  },
+ "partial_build": false,
+ "missing_sources": [],
  "outputs": {
-  "indicators.json": "bbb6c79a242571201b0c8251d3c5951c18bfa4dcf6973d638da7b07a00b648b0",
-  "mpi_framework.json": "0f2714353abca619a2785d5fe0fb2814db7b35b66bb6e53f7a25cf1fe6cf9429",
-  "observations.csv": "004fd598b9ca1d69fa0e49d014502dec4a6e2f731412f9f382a28aca7921269b",
+  "data_quality_summary.csv": "249ef0b813b459b7c89d57ca737fea9a2101a571c51e433bec86e374e3a7b043",
+  "indicators.json": "8e67193bb19803c6efc49d43b7e3b740fd26917f1bdf8f37b13f009567217825",
+  "mpi_framework.json": "4b6e912bdda3e3af07a7a7f39717ace8a48997bcc88b8da3e3e2c91ecd4612e8",
+  "observations.csv": "4e7da301b5f3f7269af934ad352e45a51013eb8c53107cf97f0933e994e3e51c",
   "observations.json": "3ce9b2543399ca083a7c669b7916dd72cef2d68a2fb0d8f76bbcf88a4e38beaf",
-  "sources.json": "07a892f67155cb3b58d63ecc29f065103b61271c53c70f5f95ccf3244954885a",
-  "unavailable_financial.json": "e7a1088463494b7f35d0519cbccbf113ad46ab7bcc39c08d1c6920b41a80e625",
-  "validation_report.json": "d51e307a6fd1f7c8052bf4cd102dc25ba6290ffc5e467304791fad2133607086"
+  "sources.json": "d145d07dd5f1ee145780807cab253a9f585b9a3d7cc86ae2431ea7545a4babe2",
+  "unavailable_financial.json": "a768d7c5e594f329c1405c4b88102424d517076ab90372436126570749d36398",
+  "validation_report.json": "c5779c2ecb8f7a1f100ae2853360f815151f142fbd5381de58f1dc9df700535f"
  }
 }

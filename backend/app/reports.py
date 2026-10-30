@@ -246,3 +246,11 @@ def scenario_csv(result: dict) -> str:
            f"Total budget RWF {s['total_budget_rwf']:,}; allocated {s['allocated_rwf']:,}; unallocated {s['unallocated_rwf']:,}",
            result["labels"]["not_measured"], result["labels"]["reach_definition"]]
     return to_csv(rows, preamble=pre)
+
+
+def profile_csv(profile: dict) -> str:
+    rows = [{**{k: e.get(k) for k in ("indicator_id", "name", "unit", "value", "se", "ci_low", "ci_high", "cv",
+                                      "national", "province", "rank", "n_peers", "period", "status", "table_ref")},
+             "source": e["source"]["short"], "vs_national": (e.get("vs_national") or {}).get("label")}
+            for e in profile["indicators"]]
+    return to_csv(rows, preamble=[f"Imboni area profile: {profile['name']} ({profile['level']})", DISCLAIMER])

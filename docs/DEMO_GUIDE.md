@@ -1,5 +1,21 @@
 # Demo guide (≈ 7 minutes)
 
+## Streamlit dashboard (primary)
+
+**Setup:** `streamlit run streamlit_app.py` (or the Community Cloud URL once deployed), open full-screen.
+
+| Time | Page | Show |
+|---|---|---|
+| 0:00 | **National Intelligence** | Monetary 27.4% (CI) vs MPI 30.5% — two concepts; overlap matrix: 14.3% poor on both, 43.6% on at least one. Hover a KPI ⓘ; point to Official/Calculated badges. |
+| 1:00 | **Geographic Intelligence** | District poverty map + ranked bars with 95% CIs; hover Nyamagabe (rank interval). Switch indicator to MPI incidence → only Province is offered. *Area profile* → Nyamagabe fingerprint and significance findings. |
+| 2:30 | **Multidimensional Poverty** | Censored vs uncensored headcounts; compare Rural/Urban/Q1; contributions: toggle Recomputed vs Published and explain the inconsistency found. |
+| 3:30 | **Financial Inclusion** | Access strand 2020 vs 2024, districts map, poor vs non-poor savings, VUP channels, data-gap table. |
+| 4:30 | **Intervention Simulator** | RWF 5,000 M → District → Nyamagabe → *Need-weighted split*; drag a slider past 100% (results withheld), *Equal split*, save, rename, change, save → comparison + CSV/PDF. Stress: illustrative arithmetic. |
+| 5:45 | **Policy Insights** | Two cards: finding → statistics with badges → source → scope → implication (labelled interpretation) → limitations. |
+| 6:30 | **Data Explorer / Sources & Methods** | Ask "Which districts have the highest poverty rate?"; data-quality tab; inventory of restricted datasets. |
+
+## React + FastAPI variant
+
 **Setup:** run the app (`uvicorn backend.app.main:app --port 8000` after `npm run build`), open
 http://localhost:8000 full-screen. Pre-save two simulator scenarios for the comparison step.
 

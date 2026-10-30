@@ -20,6 +20,13 @@
    not resolved; NISR clarification would settle them.
 9. **Persistence on free hosting** — SQLite in a container resets on redeploy unless a managed MySQL is configured.
 10. **Deterministic Q&A** understands a limited vocabulary by design.
+11. **Streamlit scenarios are session-only.** Saved comparisons disappear when the browser session ends (export the
+    CSV/PDF); the React/FastAPI variant can persist them in a database.
+12. **Map geometry is geoBoundaries, not NISR GIS files.** The NISR GIS portal could not be used (TLS certificate
+    problem, licence not stated); boundaries are simplified and suitable for display, not for area calculations.
+13. **Policy implications are interpretations.** The Policy Insights page computes findings from data, but the
+    "potential implication" text is the team's judgement and is labelled as such.
+14. **No predictive modelling** — deliberately (see METHODOLOGY §13).
 
 ## Future improvements
 

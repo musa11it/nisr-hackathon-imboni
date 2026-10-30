@@ -41,8 +41,12 @@ def _key(o):
     return (o["indicator_id"], o["level"], o["geo_id"], o["period"], o.get("breakdown") or "")
 
 
-def validate(observations: list[dict], extra_checks: list[dict]) -> dict:
+def validate(observations: list[dict], extra_checks: list[dict], missing_sources: set[str] | None = None) -> dict:
     checks: list[dict] = []
+    missing_sources = set(missing_sources or ())
+
+    def available(ind: str) -> bool:
+        return INDICATOR_INDEX.get(ind, {}).get("source_id") not in missing_sources
 
     def add(name, passed, detail, severity_if_fail="error"):
         checks.append({"check": name, "passed": bool(passed), "detail": detail,
@@ -88,10 +92,14 @@ def validate(observations: list[dict], extra_checks: list[dict]) -> dict:
                 "improved_sanitation", "internet_home", "mobile_phone", "smartphone", "roof_metal",
                 "umudugudu", "workforce_ratio", "sending_transfers", "fs_banked", "fs_excluded",
                 "households_census", "household_size_census"]:
+        if not available(ind):
+            continue
         got = {o["geo_name"] for o in observations if o["indicator_id"] == ind and o["level"] == "district"}
         add(f"district_coverage:{ind}", got == set(DISTRICT_PROVINCE),
             f"{len(got)}/30 districts; missing {sorted(set(DISTRICT_PROVINCE) - got)}")
     for ind in ["poverty_rate", "mpi_incidence", "mpi", "mpi_ch_cooking_fuel", "fs_banked"]:
+        if not available(ind):
+            continue
         got = {o["geo_id"] for o in observations if o["indicator_id"] == ind and o["level"] == "province"}
         add(f"province_coverage:{ind}", got == set(PROVINCES), f"{len(got)}/5 provinces")
 
@@ -181,7 +189,8 @@ def validate(observations: list[dict], extra_checks: list[dict]) -> dict:
         "warning")
 
     # 10. VUP payment channels sum to 100
-    for comp in ["direct_support", "classic_public_works", "expanded_public_works", "nsds"]:
+    for comp in ([] if "eicv7_vup" in missing_sources else
+                 ["direct_support", "classic_public_works", "expanded_public_works", "nsds"]):
         s = (val("vup_payment_sacco", "vup_component", comp) or 0) + (val("vup_payment_momo", "vup_component", comp) or 0)
         add(f"vup_payment_channels_sum_100:{comp}", abs(s - 100) <= 0.1, f"SACCO + MoMo = {s:.2f}")
 
@@ -202,6 +211,9 @@ def validate(observations: list[dict], extra_checks: list[dict]) -> dict:
             f"share-weighted = {agg:.2f} vs national {nat:.2f} (integer population shares)", "warning")
 
     checks.extend({"severity": "info" if c["passed"] else c.get("severity", "warning"), **c} for c in extra_checks)
+    for sid in sorted(missing_sources):  # partial build: the gap is a documented warning, never a silent omission
+        add(f"source_available:{sid}", False, f"{sid} raw file missing; its indicators are absent from this build",
+            "warning")
 
     summary = Counter(c["severity"] for c in checks)
     return {

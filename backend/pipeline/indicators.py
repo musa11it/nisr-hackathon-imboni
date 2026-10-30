@@ -255,7 +255,7 @@ for _id, _label, _dim, _w, _cut in MPI_INDICATORS:
         notes="Cannot be reproduced from Table B.2 and the stated weights; see validation report."))
     INDICATORS.append(_ind(
         f"mpi_contrib_calc_{_id}", f"Recomputed contribution to MPI — {_label}", "mpi_indicator", "%", "Population",
-        f"Contribution recomputed by Imboni as w_j × CH_j / Σ_i w_i × CH_i using official weights and censored headcounts.",
+        "Contribution recomputed by Imboni as w_j × CH_j / Σ_i w_i × CH_i using official weights and censored headcounts.",
         "eicv7_mpi", "Derived from Tables B.2–B.4 + report weights", "neutral", short=_label, status="calculated"))
 
 INDICATOR_INDEX = {i["id"]: i for i in INDICATORS}

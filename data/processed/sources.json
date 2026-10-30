@@ -281,6 +281,38 @@
   "retrieval": null
  },
  {
+  "id": "eicv7_vup_microdata",
+  "short": "EICV7 VUP microdata (not used)",
+  "title": "Rwanda \u2014 EICV7 2023-2024, VUP (microdata)",
+  "publisher": "National Institute of Statistics of Rwanda (NISR)",
+  "period": "2023/24",
+  "url": "https://www.microdata.statistics.gov.rw/index.php/catalog/121",
+  "landing_page": "https://www.microdata.statistics.gov.rw/index.php/catalog/121",
+  "file": null,
+  "format": "microdata",
+  "access": "registration required (NISR Microdata Portal) \u2014 NOT downloaded",
+  "license": "Subject to NISR Microdata Release Policy and terms accepted at registration.",
+  "used_for": "Not used. Published VUP thematic tables (eicv7_vup) are used instead.",
+  "citation": "NISR (2025). EICV7 2023-2024 VUP, Ref. RWA-NISR-EICV7-VUP-2023-2024-V01.",
+  "retrieval": null
+ },
+ {
+  "id": "nisr_gis",
+  "short": "NISR GIS portal (reference)",
+  "title": "NISR GIS / geospatial portal",
+  "publisher": "National Institute of Statistics of Rwanda (NISR)",
+  "period": "n/a",
+  "url": "https://www.gis.statistics.gov.rw/",
+  "landing_page": "https://www.gis.statistics.gov.rw/",
+  "file": null,
+  "format": "web portal",
+  "access": "reference only \u2014 NOT downloaded (portal served a self-signed TLS certificate when checked on 2026-10-30)",
+  "license": "Not stated on the landing page.",
+  "used_for": "Not used. Map geometry comes from geoBoundaries (CC BY 4.0), whose Rwanda layers cite official Rwandan sources. Official NISR boundary files can replace them if the team obtains them.",
+  "citation": "NISR GIS portal, https://www.gis.statistics.gov.rw/ (accessed 2026-10-30).",
+  "retrieval": null
+ },
+ {
   "id": "geoboundaries_adm1",
   "short": "geoBoundaries RWA ADM1",
   "title": "geoBoundaries \u2014 Rwanda ADM1 (provinces), simplified",

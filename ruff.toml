@@ -1,0 +1,7 @@
+# Lint configuration used locally and in CI (.github/workflows/ci.yml).
+line-length = 130
+extend-exclude = ["frontend", "data"]
+
+[lint]
+# Pyflakes (unused/undefined names) and syntax errors: catches real bugs without restyling existing code.
+select = ["F", "E9"]

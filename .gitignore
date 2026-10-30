@@ -1,5 +1,6 @@
 # Secrets & local config
 .env
+.streamlit/secrets.toml
 .env.*
 !.env.example
 *.pem
@@ -43,3 +44,7 @@ Thumbs.db
 data/raw/**
 !data/raw/README.md
 data/test_imboni.db
+
+# Restricted microdata (authorised users only) — never commit
+data/restricted/
+
