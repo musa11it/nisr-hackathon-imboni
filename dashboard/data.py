@@ -151,3 +151,9 @@ def province_options() -> list[tuple[str, str]]:
 
 def indicator_meta(ind: str) -> dict:
     return store().indicator_index.get(ind, {})
+
+
+@st.cache_data(show_spinner=False)
+def rwanda_svg() -> str:
+    from .charts import rwanda_svg as build
+    return build(store().geo["district"])

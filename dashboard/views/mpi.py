@@ -8,7 +8,7 @@ import streamlit as st
 
 from .. import charts, data
 from ..theme import BRAND_500, S1, S2, S3, SERIES
-from ..ui import callout, chart, guarded, hero, kpi_cards, metric_card, section, sources_line
+from ..ui import chart, guarded, hero, kpi_cards, metric_card, note, section, sources_line
 
 DIM_COLORS = {"Education": S1, "Health": S2, "Living standards": S3}
 
@@ -20,27 +20,31 @@ def render() -> None:
     d = data.dashboard()
     fw = m["framework"]
     k_pct = fw["poverty_cutoff_k"] * 100  # stored as a fraction (1/3); the k-curve is in percent
-    hero("Multidimensional Poverty", "Which deprivations drive the MPI",
-         "Rwanda's national MPI (EICV7) uses 13 indicators in 3 dimensions. A person is MPI-poor when their household's "
-         "weighted deprivation score is at least one-third. Censored headcounts count people who are both MPI-poor "
-         "and deprived in an indicator.",
-         [fw["method"], f"k = {k_pct:.1f}%", "Published to province & quintile level"])
     k = d["kpis"]
+    top = sorted(d["deprivations"], key=lambda r: -(r["censored"] or 0))[:2]
+    gap = k["rural_urban_gap"]
+    hero("Rwanda · Multidimensional Poverty", "Which deprivations drive the MPI",
+         f"{len(fw['indicators'])} indicators in 3 dimensions; MPI-poor = weighted deprivations ≥ {k_pct:.1f}%.",
+         [fw["method"], "Published to province & quintile level", "Source: NISR EICV7 MPI report"],
+         stats=[(f"{top[0]['censored']:.1f}", "%", f"{top[0]['label'].lower()} · censored"),
+                (f"{top[1]['censored']:.1f}", "%", f"{top[1]['label'].lower()} · censored"),
+                (f"{gap['ratio']:.1f}", "×", "rural ÷ urban")],
+         accent="drive")
     kpi_cards([metric_card(k["mpi_incidence"], "Incidence (H)", accent=S3),
                metric_card(k["mpi_intensity"], "Intensity (A)", accent=S3),
                metric_card(k["mpi"], "MPI (M0 = H × A)", accent=S3),
                {"label": "Indicators", "value": str(len(fw["indicators"])), "sub": "3 dimensions, nested weights",
                 "status": "official", "help": fw["source"]}])
 
-    section("Deprivation headcounts", "Uncensored: everyone deprived in the indicator. Censored: deprived AND MPI-poor. "
-                                      "National, 2023/24.")
+    section("Deprivation headcounts", "Censored = deprived AND MPI-poor · uncensored = everyone deprived. National, "
+                                      "2023/24.", eyebrow="What people lack")
     dep = d["deprivations"]
     chart(charts.grouped_bars([r["label"] for r in dep],
                               [("Censored (MPI-poor & deprived)", [r["censored"] for r in dep], BRAND_500),
                                ("Uncensored (all deprived)", [r["uncensored"] for r in dep], S1)],
                               horizontal=True), key="mpi_heads")
 
-    section("Compare groups", "Censored headcounts by area, province or consumption quintile.")
+    section("Compare groups", "Censored headcounts by area, province or consumption quintile.", eyebrow="Who lacks it")
     table = m["table"]
     labels = {f"{r['level']}:{r['geo_id']}": r["name"] for r in table}
     pick = st.multiselect("Groups", list(labels), default=["national:rwanda", "area:urban", "area:rural"],
@@ -52,9 +56,10 @@ def render() -> None:
         series = [(labels[g], [rows[g]["censored"].get(i["id"]) for i in inds], SERIES[n]) for n, g in enumerate(pick)]
         chart(charts.grouped_bars([i["label"] for i in inds], series, horizontal=True), key="mpi_groups")
 
-    section("Contribution of each indicator to the MPI",
-            "Share of M0 attributable to each indicator: w·CH / Σ w·CH (Alkire–Foster decomposition).")
-    callout("caution", "Published contributions are not reproducible", m["contribution_note"])
+    section("What drives the MPI", "Share of M0 from each indicator: w·CH / Σ w·CH (Alkire–Foster decomposition).",
+            eyebrow="Contributions")
+    note("Finding: NISR's published contributions are not reproducible — details", m["contribution_note"],
+         kind="caution")
     which = st.radio("Contribution values", ["Recomputed (calculated)", "Published by NISR (Tables B.7–B.9)"],
                      horizontal=True)
     key = "contrib_calc" if which.startswith("Recomputed") else "contrib_published"

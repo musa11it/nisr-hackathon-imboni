@@ -56,10 +56,10 @@ def methodology_report() -> str:
 @guarded
 def render() -> None:
     s = data.store()
-    hero("Reports & Exports", "Take the evidence with you",
-         "Area profiles as PDF or CSV, the full validated datasets, a methodology report with source checksums, and "
-         "the policy insights — every export carries source attribution and the independence statement.",
-         ["CSV · PDF · Markdown · JSON", "Aggregate data only"])
+    hero("Data · Reports & Exports", "Take the evidence with you",
+         "Area profiles, validated datasets, methodology and insights — every export carries its sources.",
+         ["Aggregate data only", "CSV · PDF · Markdown · JSON"],
+         accent="with you")
 
     section("Area profile report", "Indicators with confidence intervals, rank among peers and significance vs national.")
     c1, c2 = st.columns([1, 2])

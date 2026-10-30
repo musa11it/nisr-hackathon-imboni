@@ -11,8 +11,8 @@ from backend.app import reports, simulator
 
 from .. import charts, data
 from ..logic import allocation_status, compare_scenarios, equal_split, round_shares, scenario_row
-from ..theme import BRAND_500, S1, S2, SERIES, STATUS
-from ..ui import badge, callout, chart, guarded, hero, kpi_cards, section
+from ..theme import BRAND_500, S1, S2, S3, SERIES, STATUS
+from ..ui import badge, chart, guarded, hero, kpi_cards, note, section
 
 CATALOGUE = {c["id"]: c for c in simulator.catalogue()}
 MAX_SAVED = 6
@@ -87,15 +87,20 @@ def _meter(status: dict) -> None:
 def render() -> None:
     _init_state()
     ss = st.session_state
-    hero("Intervention Simulator", "What could a budget reach?",
-         "Allocate a budget across interventions and see how many households it could pay for, capped by measured need "
-         "in the chosen area. This is transparent budget arithmetic — it does not predict poverty reduction.",
-         ["Need rates: EICV7 / FinScope", "Households: Census 2022", "Unit costs: your assumptions"])
-    callout("caution", "Illustrative scenario only",
-            "Default unit costs are placeholders chosen by the DataMinds team, not costed programme estimates. "
-            "Reach is arithmetic (budget ÷ unit cost, capped by need) and is not a measured outcome or an impact estimate.")
+    nat = data.sim_context("national", "rwanda")
+    hero("Decide · Intervention Simulator", "What could a budget reach?",
+         "Allocate a budget; see how many households it pays for, capped by measured need. Arithmetic, not a forecast.",
+         ["Need rates: EICV7 / FinScope", "Households: Census 2022", "Unit costs: your assumptions"],
+         stats=[(f"{nat['households']:,.0f}", "", "households · Census 2022"),
+                (str(len(CATALOGUE)), "", "interventions"),
+                (str(len(data.district_options())), "", "districts")],
+         accent="budget")
+    note("Illustrative only — default unit costs are placeholders",
+         "Default unit costs are placeholders chosen by the DataMinds team, not costed programme estimates. "
+         "Reach is arithmetic (budget ÷ unit cost, capped by need) and is not a measured outcome or an impact estimate.",
+         kind="caution")
 
-    section("1 · Budget and geography")
+    section("Budget and geography", eyebrow="Step 1")
     c1, c2 = st.columns([1, 1])
     with c1:
         name = st.text_input("Scenario name", value="Scenario A", max_chars=120, key="sim_name")
@@ -106,7 +111,7 @@ def render() -> None:
     level, gid = _geo_picker()
     ctx = data.sim_context(level, gid)
 
-    section("2 · Interventions and allocation", "Drag the sliders; amounts update immediately. Unit costs are editable.")
+    section("Interventions and allocation", "Drag the sliders; unit costs are editable.", eyebrow="Step 2")
     st.multiselect("Interventions", list(CATALOGUE), key="sim_ids", format_func=lambda k: CATALOGUE[k]["label"])
     ids = ss["sim_ids"]
     b1, b2, b3, _ = st.columns([1, 1, 1, 1.4])
@@ -155,8 +160,8 @@ def render() -> None:
     res = simulator.run_scenario(data.store(), inp)
     sm = res["summary"]
 
-    section("3 · Estimated reach", f"{res['context']['name']} — {res['context']['households']:,.0f} private households "
-                                   f"(Census 2022), mean size {res['context']['household_size']:.1f}.")
+    section("Estimated reach", f"{res['context']['name']} — {res['context']['households']:,.0f} private households "
+                                   f"(Census 2022), mean size {res['context']['household_size']:.1f}.", eyebrow="Step 3")
     kpi_cards([
         {"label": "Allocated", "value": f"{sm['allocated_rwf'] / 1e6:,.1f}", "unit": " M RWF",
          "sub": f"Unallocated RWF {sm['unallocated_rwf'] / 1e6:,.1f} M", "status": "assumption", "accent": S2},
@@ -171,10 +176,14 @@ def render() -> None:
     lines = res["lines"]
     a, b = st.columns([1.15, 1], gap="large")
     with a:
-        cov = [{"geo_id": l["id"], "geo_name": l["label"], "value": l["coverage_of_need_pct"] or 0} for l in lines]
-        fig = charts.ranked_bars(cov, title="Coverage of measured need (%)", worse_high=True)
-        fig.update_layout(xaxis=dict(range=[0, 105]))
-        chart(fig, key="sim_cov")
+        order = sorted(lines, key=lambda l: -(l["eligible_households"] or 0))
+        chart(charts.grouped_bars([l["label"] for l in order],
+                                  [("Households in need (eligible)", [l["eligible_households"] for l in order], S1),
+                                   ("Reached by this budget", [l["households_reached"] for l in order], S3)],
+                                  unit="", horizontal=True, decimals=0, title="Need vs reach (households)"),
+              key="sim_cov")
+        st.caption("Gap between the bars = measured need this budget cannot cover at your unit costs; coverage % is in "
+                   "the table below.")
     with b:
         mult = [s["multiplier"] for s in lines[0]["sensitivity"]]
         series = [(l["label"], [s["households_reached"] for s in l["sensitivity"]], SERIES[i])
@@ -212,7 +221,8 @@ def render() -> None:
         st.toast(f"Saved “{res['name']}”. Rename the scenario to save another.")
 
     saved = ss["sim_saved"]
-    section("4 · Compare scenarios", f"Saved in this browser session only (max {MAX_SAVED}); nothing is stored on a server.")
+    section("Compare scenarios", f"Saved in this browser session only (max {MAX_SAVED}); nothing is stored on a "
+                                 "server.", eyebrow="Step 4")
     if not saved:
         st.caption("Save at least one scenario to compare. Tip: save, change the allocation or geography, rename, save again.")
         return

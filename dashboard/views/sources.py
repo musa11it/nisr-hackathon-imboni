@@ -15,11 +15,10 @@ def render() -> None:
     s = data.store()
     man = s.manifest
     inv = data.inventory()
-    hero("Sources & Methods", "Data inventory and provenance",
-         "Every official file Imboni uses, its access conditions, reference period, retrieval date and checksum — "
-         "and the datasets that are restricted or still missing.",
+    hero("Data · Sources & Methods", "Data inventory and provenance",
+         "Every official file — access, period, retrieval date and checksum — plus what is restricted or missing.",
          [f"Pipeline v{man.get('pipeline_version', '?')}", f"Processed {str(man.get('generated_at', '?'))[:10]}",
-          "Raw files kept byte-for-byte"])
+          "Raw files kept byte-for-byte"], accent="provenance")
     v = s.validation["summary"]
     kpi_cards([
         {"label": "Sources registered", "value": str(len(s.sources)), "status": "official"},

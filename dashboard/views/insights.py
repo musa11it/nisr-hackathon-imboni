@@ -38,10 +38,13 @@ def to_markdown(items: list[dict]) -> str:
 def render() -> None:
     res = data.policy_insights()
     items = res["insights"]
-    hero("Policy Insights", "What the evidence supports",
-         "Each insight is recomputed from the validated tables: a finding, the statistics behind it, its source table, "
-         "the geographic scope the source supports, a potential implication, and the limits on what it can show.",
-         [f"{len(items)} insights", "Recomputed live from processed data", "Implications are the team's interpretation"])
+    hero("Decide · Policy Insights", "What the evidence supports",
+         "Findings recomputed from validated tables, each with its statistics, source and limits.",
+         ["Recomputed live from processed data", "Implications are the team's interpretation"],
+         stats=[(str(len(items)), "", "evidence-backed insights"),
+                (str(len({i['theme'] for i in items})), "", "themes"),
+                (str(len({s['id'] for i in items for s in i['sources']})), "", "official sources cited")],
+         accent="evidence")
     themes = sorted({i["theme"] for i in items})
     pick = st.pills("Theme", themes, selection_mode="multi", default=themes)
     shown = [i for i in items if i["theme"] in (pick or themes)]
@@ -56,11 +59,14 @@ def render() -> None:
 <div class="finding">{escape(i['finding'])}</div>
 <div class="im-chips">{chips}</div>
 <div class="im-kv">
+ <div class="k">Potential implication</div><div class="v">{escape(i['implication'])} <span class="im-badge experimental" title="{escape(i['implication_label'])}">interpretation</span></div>
+</div>
+<details class="im-note" style="margin:12px 0 0"><summary>Evidence trail — source, scope and limitations</summary><div class="b">
+<div class="im-kv" style="margin-top:0">
  <div class="k">Source</div><div class="v im-source" style="margin:0">{srcs}</div>
  <div class="k">Geographic scope</div><div class="v">{escape(i['scope'])}</div>
- <div class="k">Potential implication</div><div class="v">{escape(i['implication'])} <span class="im-badge experimental" title="{escape(i['implication_label'])}">interpretation</span></div>
  <div class="k">Limitations</div><div class="v"><ul style="margin:0;padding-left:18px">{lims}</ul></div>
-</div></div>""", unsafe_allow_html=True)
+</div></div></details></div>""", unsafe_allow_html=True)
     if res["skipped"]:
         callout("gap", "Insights not shown", "These could not be computed from the available data and were skipped rather "
                 "than approximated: " + ", ".join(f"{s['id']} ({s['reason']})" for s in res["skipped"]))

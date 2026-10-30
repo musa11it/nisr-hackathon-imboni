@@ -10,7 +10,7 @@ from backend.app.analytics import DISTRICT_INDICATORS
 from .. import charts, data
 from ..logic import correlation_matrix
 from ..theme import S1, S2, S3
-from ..ui import badge, callout, chart, empty_state, fmt, guarded, hero, kpi_cards, section, sources_line
+from ..ui import badge, callout, chart, empty_state, fmt, guarded, hero, kpi_cards, note, section, sources_line
 
 MAP_EXCLUDE = {"households_census", "household_size_census"}
 
@@ -70,10 +70,10 @@ def _map_tab() -> None:
          "status": "calculated" if has_tests else "unavailable",
          "help": "Approximate two-sample z-test at the 95% level using NISR standard errors."},
     ])
-    m1, m2 = st.columns([1.1, 1], gap="large")
+    m1, m2 = st.columns([1.2, 1], gap="large")
     with m1:
-        chart(charts.choropleth(s.geo[level], rows, meta["short_name"], unit, worse_high, meta.get("decimals", 1)),
-              key=f"map_{ind}_{level}")
+        chart(charts.choropleth(s.geo[level], rows, meta["short_name"], unit, worse_high, meta.get("decimals", 1),
+                                height=600), key=f"map_{ind}_{level}")
         st.caption("Boundaries: geoBoundaries (CC BY 4.0). Colour classes are continuous; hover for value, CI, "
                    "rank interval and test vs national. Grey = not published.")
     with m2:
@@ -81,8 +81,8 @@ def _map_tab() -> None:
                                  highlight=highlight, worse_high=worse_high, decimals=meta.get("decimals", 1),
                                  title=f"{meta['short_name']} by {level} (most deprived first)"),
               key=f"bars_{ind}_{level}")
-    callout("method", "Reading ranks honestly", layer["rank_note"] + " Overlapping intervals mean two areas cannot be "
-            "reliably ordered.")
+    note("Reading ranks honestly", layer["rank_note"] + " Overlapping intervals mean two areas cannot be "
+         "reliably ordered.")
     df = pd.DataFrame([{
         "Area": r["geo_name"], "Value": r["value"], "95% CI low": r["ci_low"], "95% CI high": r["ci_high"],
         "CV %": r["cv"], "Rank": r.get("rank"), "Rank 90% low": r.get("rank_low"), "Rank 90% high": r.get("rank_high"),
@@ -147,9 +147,10 @@ def _profile_tab() -> None:
 
 def _associations_tab() -> None:
     s = data.store()
-    callout("caution", "Ecological associations — not causal effects",
+    note("Ecological associations — not causal effects",
             "Correlations between district averages describe districts, not households, and cannot show cause and "
-            "effect. With n ≤ 30 the intervals are wide, and many indicators share common drivers (urbanisation, Kigali).")
+            "effect. With n ≤ 30 the intervals are wide, and many indicators share common drivers (urbanisation, Kigali).",
+         kind="caution")
     choices = [i for i in DISTRICT_INDICATORS]
     sel = st.multiselect("Indicators (district level)", choices,
                          default=["poverty_rate", "electricity_lighting", "improved_sanitation", "health_insurance_cov",
@@ -192,7 +193,7 @@ def _associations_tab() -> None:
 def _index_tab() -> None:
     s = data.store()
     ci = data.composite()
-    callout("caution", ci["name"], " ".join(ci["warnings"]))
+    note(f"{ci['name']} — experimental, read before using", " ".join(ci["warnings"]), kind="caution")
     rows = ci["rows"]
     chart(charts.ranked_bars([{"geo_id": r["geo_id"], "geo_name": r["name"], "value": r["score"], "rank": r["rank"]}
                               for r in rows], unit="", title="Service-gap score (0 = smallest gaps, 100 = largest)",
@@ -209,10 +210,15 @@ def _index_tab() -> None:
 
 @guarded
 def render() -> None:
-    hero("Geographic Intelligence", "Where deprivation is concentrated",
-         "District and province estimates with NISR's own standard errors, 95% confidence intervals, significance tests "
-         "against the national rate and Monte-Carlo rank intervals — so differences are not over-read.",
-         ["30 districts · 5 provinces", "geoBoundaries ADM1/ADM2", "Only published levels are mapped"])
+    pov = sorted([r for r in data.map_layer("poverty_rate", "district")["rows"] if r["value"] is not None],
+                 key=lambda r: -r["value"])
+    hero("Rwanda · Geographic Intelligence", "Where deprivation is concentrated",
+         "District poverty rates with NISR's standard errors and honest rank intervals.",
+         ["Maps: geoBoundaries ADM1/ADM2 (CC BY 4.0)", "Only published levels are mapped"],
+         stats=[(f"{pov[0]['value']:.1f}", "%", f"{pov[0]['geo_name']} · highest"),
+                (f"{pov[-1]['value']:.1f}", "%", f"{pov[-1]['geo_name']} · lowest"),
+                (f"{pov[0]['value'] / pov[-1]['value']:.1f}", "×", "highest ÷ lowest")],
+         accent="concentrated")
     t1, t2, t3, t4 = st.tabs(["Map & rankings", "Area profile", "Associations", "Service-gap index (experimental)"])
     with t1:
         _map_tab()

@@ -52,13 +52,15 @@ st.logo(str(ASSETS / "imboni-logo.svg"), size="large", icon_image=str(ASSETS / "
 page = st.navigation(PAGES, position="sidebar")
 
 with st.sidebar:
-    st.markdown('<div class="im-brand-tag">From Data to Development Action</div>', unsafe_allow_html=True)
     try:
         v = data.store().validation["summary"]
-        st.markdown(f'<div class="im-side-note">Team <b>DataMinds</b> · NISR 2026 Big Data Hackathon · Track: Financial '
-                    f'Inclusion &amp; Poverty Reduction<br>Data: NISR EICV7 2023/24, FinScope 2024, Census 2022 · '
-                    f'{v["passed"]}/{v["total"]} validation checks passed<br>Student project — not an official NISR '
-                    f'product.</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="im-side-card"><div class="k">From data to development action</div>'
+                    f'<div class="row"><span>Team</span><b>DataMinds</b></div>'
+                    f'<div class="row"><span>Track</span><b>Financial inclusion &amp; poverty</b></div>'
+                    f'<div class="row"><span>Data</span><b>EICV7 · FinScope · Census</b></div>'
+                    f'<div class="row"><span>Checks</span><b>{v["passed"]}/{v["total"]} passed</b></div>'
+                    f'<div style="margin-top:8px">NISR 2026 Big Data Hackathon · student project, not an official NISR '
+                    f'product.</div></div>', unsafe_allow_html=True)
     except data.DataUnavailable:
         st.warning("Processed data missing — run the pipeline.")
 

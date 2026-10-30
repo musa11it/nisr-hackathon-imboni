@@ -7,7 +7,7 @@ import streamlit as st
 
 from .. import charts, data
 from ..theme import S1, S2, STRAND
-from ..ui import badge, callout, chart, guarded, hero, kpi_cards, section, sources_line
+from ..ui import badge, chart, guarded, hero, kpi_cards, note, section, sources_line
 
 SEGMENTS = {k: label for k, label, _ in STRAND} | {"formally_served": "Formally served (banked + other formal)"}
 
@@ -16,36 +16,41 @@ SEGMENTS = {k: label for k, label, _ in STRAND} | {"formally_served": "Formally 
 def render() -> None:
     s = data.store()
     f = data.financial()
-    hero("Financial Inclusion", "Access is near-universal; depth is not",
-         "FinScope 2024 measures how adults (16+) access financial services; EICV7 adds household savings and "
-         "mobile-money accounts by poverty status, and VUP payment channels. Variables that are collected but not "
-         "published are listed as gaps, not estimated.",
-         ["FinScope Rwanda 2024 (adults 16+)", "EICV7 2023/24 (households)", "Transcribed chart values are labelled"])
     n24, n20 = f["national_strand"]["2024"], f["national_strand"]["2020"]
     hl = {h["key"]: h for h in f["headline"]}
     eicv = f["eicv"]
+    sav = eicv["hh_savings_account"]
+    urb, rur = f["area"]["urban"]["2024"], f["area"]["rural"]["2024"]
+    hero("Rwanda · Financial Inclusion", "Access is near-universal; depth is not",
+         "FinScope 2024 adults, EICV7 households and VUP payments — unpublished variables shown as gaps.",
+         ["FinScope Rwanda 2024 (adults 16+)", "EICV7 2023/24 (households)", "Transcribed chart values are labelled"],
+         stats=[(f"{urb['fs_banked']:.0f} vs {rur['fs_banked']:.0f}", "%", "banked · urban vs rural"),
+                (f"{sav['non_poor'] - sav['poor']:.1f}", "pp", "savings gap · poor vs not"),
+                (f"{eicv['hh_momo_account']['poor']:.1f}", "%", "poor HH · mobile money")],
+         accent="depth")
     cards = [
-        {"label": "Adults banked", "value": f"{n24['fs_banked']:.0f}", "unit": "%", "sub": f"2020: {n20['fs_banked']:.0f}%",
+        {"label": "Adults banked", "value": f"{n24['fs_banked']:.0f}", "unit": "%", "meter": n24["fs_banked"], "sub": f"2020: {n20['fs_banked']:.0f}%",
          "status": "official_transcribed", "period": "2024", "help": s.indicator_index["fs_banked"]["definition"], "accent": S1},
-        {"label": "Adults financially excluded", "value": f"{n24['fs_excluded']:.0f}", "unit": "%",
+        {"label": "Adults financially excluded", "value": f"{n24['fs_excluded']:.0f}", "unit": "%", "meter": n24["fs_excluded"],
          "sub": f"2020: {n20['fs_excluded']:.0f}%", "status": "official_transcribed", "period": "2024",
          "help": s.indicator_index["fs_excluded"]["definition"], "accent": S1},
     ]
     if "formal_inclusion" in hl:
         cards.append({"label": hl["formal_inclusion"]["label"], "value": f"{hl['formal_inclusion']['value']:.0f}", "unit": "%",
+                      "meter": hl["formal_inclusion"]["value"],
                       "status": hl["formal_inclusion"]["status"], "period": "2024", "accent": S1})
     for key, label in (("hh_savings_account", "Households with a savings account"),
                        ("hh_momo_account", "Households with a mobile-money account")):
         e = eicv[key]
-        cards.append({"label": label, "value": f"{e['all']:.1f}", "unit": "%",
+        cards.append({"label": label, "value": f"{e['all']:.1f}", "unit": "%", "meter": e["all"],
                       "sub": f"Poor {e['poor']:.1f}% · non-poor {e['non_poor']:.1f}%", "status": "official",
                       "period": e["meta"]["period"], "table": e["meta"]["table_ref"], "help": e["meta"]["definition"],
                       "accent": S2})
     kpi_cards(cards)
-    callout("caution", "Different universes", " ".join(f["caveats"]))
+    note("Different universes — FinScope adults 16+ vs EICV7 households", " ".join(f["caveats"]), kind="caution")
 
-    section("FinScope Access Strand", "Mutually exclusive segments: banked → other formal (non-bank) → informal only → "
-                                      "excluded. Each adult is counted once, in the most formal segment used.")
+    section("FinScope Access Strand", "Each adult counted once, in the most formal segment used: banked → other "
+                                      "formal → informal only → excluded.", eyebrow="Access")
     strand_rows = [("Rwanda 2024", n24), ("Rwanda 2020", n20)]
     for a in ("urban", "rural"):
         strand_rows.append((f"{a.title()} 2024", f["area"][a]["2024"]))
@@ -54,7 +59,7 @@ def render() -> None:
     strand_rows += [(p["name"], p) for p in f["provinces"]]
     chart(charts.strand_bars(strand_rows), key="fi_strand")
 
-    section("Districts", "FinScope 2024 publishes the Access Strand for all 30 districts (rounded chart labels).")
+    section("Districts", "FinScope 2024 Access Strand for all 30 districts (rounded chart labels).", eyebrow="Geography")
     c1, c2 = st.columns([1, 2])
     with c1:
         seg = st.selectbox("Segment", list(SEGMENTS), format_func=SEGMENTS.get, index=0)
@@ -73,8 +78,8 @@ def render() -> None:
                                  title=f"{SEGMENTS[seg]} by district"), key=f"fi_bars_{seg}")
     st.caption("No standard errors are published for FinScope district values, so ranks carry unquantified uncertainty.")
 
-    section("Savings and mobile money by poverty status", "EICV7 households with at least one account (Poverty Profile "
-                                                          "Table 6.9 memo items). Not published by district or province.")
+    section("Savings and mobile money by poverty status", "EICV7 households with ≥ 1 account (Poverty Profile Table "
+                                                          "6.9). National only.", eyebrow="Depth")
     labels = ["Savings account", "Mobile-money account"]
     chart(charts.grouped_bars(labels, [("Poor households", [eicv[k]["poor"] for k in ("hh_savings_account", "hh_momo_account")], S2),
                                        ("Non-poor households", [eicv[k]["non_poor"] for k in ("hh_savings_account", "hh_momo_account")], S1)],
@@ -107,10 +112,10 @@ def render() -> None:
     gaps = pd.DataFrame(f["unavailable"]).rename(columns={"variable": "Variable", "where_collected": "Where collected",
                                                           "status": "Status", "how_to_obtain": "How to obtain"})
     st.dataframe(gaps, hide_index=True, width="stretch")
-    callout("gap", "What would close these gaps",
+    note("What would close these gaps",
             "Authorised access to the EICV7 microdata (NISR Microdata Portal, catalog 119) with survey weights, strata and "
             "PSUs would allow design-based estimates of credit, loan sources and savings by district. Imboni does not "
-            "download or display microdata; see docs/MICRODATA_IMPORT.md.")
+            "download or display microdata; see docs/MICRODATA_IMPORT.md.", kind="gap")
     sources_line([{**src, "table": None} for src in f["sources"]])
     with st.expander("Why insurance, credit and savings depth are not shown"):
         st.markdown("\n".join(f"- **{escape(g['variable'])}** — {escape(g['how_to_obtain'])}" for g in f["unavailable"]))

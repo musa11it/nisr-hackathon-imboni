@@ -14,6 +14,10 @@
   the official NISR source pages; the Streamlit dashboard (`streamlit_app.py`, `dashboard/`); the policy-insights
   module; the pipeline's data inventory, missing-source handling and data-quality summary; the GitHub Actions
   workflow; additional tests; and updates to the documentation.
+- A UI/UX redesign of the Streamlit dashboard (2026-10-31): editorial page headers (with the geoBoundaries district
+  outline as the graphic), KPI cards, key-finding cards computed from the data, sidebar styling, page layout,
+  shorter on-page text (explanations moved into expandable notes) and a district poverty map on the National page.
+  No statistic, calculation or data source was changed.
 
 **What the AI did not do**
 - It was not added as a Git author, co-author or repository collaborator.

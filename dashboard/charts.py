@@ -143,8 +143,8 @@ def grouped_bars(categories: list[str], series: list[tuple[str, list[float | Non
     for name, vals, color in series:
         err = (errors or {}).get(name)
         kw = dict(name=name, marker=dict(color=color), hovertemplate=f"<b>%{{{'y' if horizontal else 'x'}}}</b><br>{name}: "
-                  f"%{{{'x' if horizontal else 'y'}:.{decimals}f}}{unit if unit == '%' else ''}<extra></extra>",
-                  texttemplate=f"%{{{'x' if horizontal else 'y'}:.{decimals}f}}", textposition="outside",
+                  f"%{{{'x' if horizontal else 'y'}:,.{decimals}f}}{unit if unit == '%' else ''}<extra></extra>",
+                  texttemplate=f"%{{{'x' if horizontal else 'y'}:,.{decimals}f}}", textposition="outside",
                   textfont=dict(color=TEXT_2, size=11), cliponaxis=False)
         if err:  # whiskers carry the uncertainty; a value label would collide with them (tooltip keeps the value)
             kw.pop("texttemplate")
@@ -157,6 +157,10 @@ def grouped_bars(categories: list[str], series: list[tuple[str, list[float | Non
         else:
             fig.add_trace(go.Bar(x=categories, y=vals, **kw))
     ax = dict(ticksuffix="%" if unit == "%" else "", rangemode="tozero")
+    tops = [v for _, vals, _ in series for v in vals if v is not None]
+    tops += [h for e in (errors or {}).values() for _, h in e if h is not None]
+    if tops and min(tops) >= 0:  # headroom so outside value labels are never clipped at the panel edge
+        ax["range"] = [0, max(tops) * 1.13 or 1]
     fig.update_layout(title=title, barmode="group", showlegend=len(series) > 1,
                       height=height or (_h(len(categories) * len(series), 22) if horizontal else 380),
                       **({"xaxis": ax, "yaxis": dict(autorange="reversed", showgrid=False)} if horizontal else
@@ -241,3 +245,35 @@ def stacked_share(categories: list[str], series: list[tuple[str, list[float | No
     fig.update_layout(title=title, barmode="stack", height=_h(len(categories), 36, 110), bargap=0.32,
                       xaxis=dict(ticksuffix=unit_suffix, showgrid=False), yaxis=dict(autorange="reversed", showgrid=False))
     return fig
+
+
+def rwanda_svg(geojson: dict, width: int = 320) -> str:
+    """Inline SVG of the district boundaries for page headers: the real geoBoundaries geometry, simplified to
+    whole pixels (equirectangular; at ~2°S the cos-latitude correction is < 0.1%)."""
+    rings = []
+    for f in geojson["features"]:
+        g = f["geometry"]
+        polys = [g["coordinates"]] if g["type"] == "Polygon" else g["coordinates"]
+        rings.append([r for p in polys for r in p[:1]])  # exterior rings only
+    xs = [pt[0] for feat in rings for r in feat for pt in r]
+    ys = [pt[1] for feat in rings for r in feat for pt in r]
+    x0, y1 = min(xs), max(ys)
+    k = width / (max(xs) - x0)
+    height = round((y1 - min(ys)) * k)
+    paths = []
+    for i, feat in enumerate(rings):
+        d = []
+        for r in feat:
+            pts, last = [], None
+            for lon, lat, *_ in r:
+                p = (round((lon - x0) * k, 1), round((y1 - lat) * k, 1))
+                if last is None or abs(p[0] - last[0]) + abs(p[1] - last[1]) >= 2.2:
+                    pts.append(p)
+                    last = p
+            if len(pts) > 2:
+                d.append("M" + "L".join(f"{x:g} {y:g}" for x, y in pts) + "Z")
+        paths.append(f'<path d="{"".join(d)}" style="animation-delay:{i * 25}ms"/>')
+    return (f'<svg class="im-rw" viewBox="-4 -4 {width + 8} {height + 8}" role="img" aria-label="Map of Rwanda\'s 30 districts">'
+            '<defs><linearGradient id="imrw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fd0c0" stop-opacity=".55"/>'
+            '<stop offset="1" stop-color="#1d8477" stop-opacity=".18"/></linearGradient></defs>'
+            f'<g fill="url(#imrw)" stroke="rgba(214,245,240,.55)" stroke-width=".7" stroke-linejoin="round">{"".join(paths)}</g></svg>')

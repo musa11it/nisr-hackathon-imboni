@@ -166,11 +166,13 @@ standard errors and suppression of cells with too few observations — into the 
 
 @guarded
 def render() -> None:
-    hero("Data Explorer", "Every number, with its source",
-         "Browse the tidy observation table behind the dashboard, inspect variable definitions, review data quality "
-         "and validation, ask questions in plain language, and download authorised aggregate data.",
-         [f"{len(data.store().observations):,} observations", f"{len(data.store().indicators)} indicators",
-          "Aggregates only"])
+    s_ = data.store()
+    hero("Data · Explorer", "Every number, with its source",
+         "The observation table behind every chart — definitions, quality, questions and downloads.",
+         ["Aggregate data only", "No microdata"],
+         stats=[(f"{len(s_.observations):,}", "", "observations"), (str(len(s_.indicators)), "", "indicators"),
+                (str(len(s_.sources)), "", "registered sources")],
+         accent="source")
     tabs = st.tabs(["Observations", "Variables", "Data quality", "Ask a question", "Restricted data"])
     with tabs[0]:
         _observations_tab()
